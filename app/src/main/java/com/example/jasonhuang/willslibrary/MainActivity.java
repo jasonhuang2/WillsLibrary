@@ -104,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void testButtonClick(View v){
+        EditText testmessage = (EditText)findViewById(R.id.testTEST);
+        testmessage.setText("CLICKED");
+    }
     //connection class
     @SuppressLint("NewApi")
     public Connection connectionclass (String user, String pass, String db, String server){
