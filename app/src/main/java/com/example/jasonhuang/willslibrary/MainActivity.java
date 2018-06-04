@@ -6,12 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Objects;
+
+import javax.xml.transform.Result;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        conn = connectionclass(un, pass, db, ip);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
@@ -54,6 +62,46 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+
+
+    public void loginButtonClick(View v){
+        conn = connectionclass(un, pass, db, ip);
+
+        EditText usernameInputBox = (EditText)findViewById(R.id.usernameInputBox);
+        EditText passwordInputBox = (EditText)findViewById(R.id.passwordInputBox);
+        TextView testText = (TextView)findViewById(R.id.textView);
+
+
+        String query = "SELECT * FROM DB_A3C994_will.dbo.users WHERE username='" + usernameInputBox.getText().toString()+"';";
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+
+            if(rs.next()){
+                String result = rs.getString("password");
+                if(passwordInputBox.getText().toString().equals(result)){
+                    testText.setText("Logged in");
+                }else{
+                    testText.setText("Incorrect username or password");
+                }
+
+
+            }else{
+                testText.setText("Something went wrong with the query");
+
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            testText.setText("EXPLODED");
+
+        }
+
+
+
     }
 
     //connection class
