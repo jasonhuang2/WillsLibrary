@@ -105,8 +105,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void testButtonClick(View v){
-        EditText testmessage = (EditText)findViewById(R.id.testTEST);
-        testmessage.setText("CLICKED");
+        TextView onoff = (TextView) findViewById(R.id.testTEST2);
+        Button onoffButton = (Button) findViewById(R.id.test_button);
+
+        if(onoff.getText().equals("OFF")){
+            onoff.setText("ON");
+            onoffButton.setText("ON");
+        }
+        else{
+            onoff.setText("OFF");
+            onoffButton.setText("OFF");
+        }
+
+
     }
     //connection class
     @SuppressLint("NewApi")

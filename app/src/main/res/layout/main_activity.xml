@@ -92,17 +92,15 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:onClick="testButtonClick"
-        android:text="Click Me" />
+        android:text="CLICK ME" />
 
-    <EditText
-        android:id="@+id/testTEST"
-        android:layout_width="99dp"
+    <TextView
+        android:id="@+id/testTEST2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_alignStart="@+id/passwordTextView"
-        android:layout_marginStart="130dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="MESSAGE" />
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textView"
+        android:background="?attr/actionModeBackground"
+        android:text="Off" />
 
 </RelativeLayout>
