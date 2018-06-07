@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">WillsLibrary</string>
+
+
+    <string-array name="adminUserListString">
+        <item>User</item>
+        <item>Admin</item>
+    </string-array>
+    <string name="title_activity_user_main_activity">user_main_activity</string>
 </resources>
