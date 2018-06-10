@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:id="spaceText">
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/welcomeText"
@@ -21,16 +18,41 @@
         android:id="@+id/nameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/welcomeText"
-        android:layout_toEndOf="@+id/spaceTextView"
+        android:layout_marginEnd="81dp"
         android:text="namegoeshere"
+        android:textAlignment="center"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/spaceTextView"
+    <Button
+        android:id="@+id/catalogue_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/welcomeText"
-        android:layout_toEndOf="@+id/welcomeText"
-        android:text="  " />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="80dp"
+        android:onClick="catalogueClick"
+        android:text="Catalogue" />
+
+    <Button
+        android:id="@+id/my_rental_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/catalogue_button"
+        android:layout_marginEnd="33dp"
+        android:onClick="my_rental_Click"
+        android:text="My Rentals" />
+
+    <Button
+        android:id="@+id/fine_button"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/catalogue_button"
+        android:layout_marginTop="148dp"
+        android:onClick="my_fines_Click"
+        android:text="My Fines" />
 </RelativeLayout>

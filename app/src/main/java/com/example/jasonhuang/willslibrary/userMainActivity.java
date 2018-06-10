@@ -1,6 +1,7 @@
 package com.example.jasonhuang.willslibrary;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -68,5 +69,20 @@ public class userMainActivity extends AppCompatActivity {
         }
 
         return connection;
+    }
+    //Going to the Catalogue page
+    public void catalogueClick(View v){
+        Intent catalogueI = new Intent(this, catalogueMainActivity.class);
+        startActivity(catalogueI);
+    }
+    //Going to the My Rentals page
+    public void my_rental_Click(View v){
+        Intent myrentalI = new Intent(this, myrentalMainActivity.class);
+        startActivity(myrentalI);
+    }
+    //Going to the My Fines page
+    public void my_fines_Click(View v){
+        Intent myfinesI = new Intent(this, myfinesMainActivity.class);
+        startActivity(myfinesI);
     }
 }

@@ -18,7 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".userMainActivity"></activity>
+        <activity android:name=".userMainActivity" />
+        <activity android:name=".catalogueMainActivity" />
+        <activity android:name=".myrentalMainActivity" />
+        <activity android:name=".myfinesMainActivity"></activity>
     </application>
 
 </manifest>
