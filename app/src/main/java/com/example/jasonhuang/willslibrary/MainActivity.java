@@ -39,9 +39,6 @@ public class MainActivity extends AppCompatActivity{
         un = "DB_A3C994_will_admin";    //enter username here
         pass = "willslibrary1";  //enter password here
 
-
-
-
     }
 
 
@@ -67,11 +64,15 @@ public class MainActivity extends AppCompatActivity{
 
             if(rs.next()){
                 String result = rs.getString("password");
+                String first_name = rs.getString("first_name");
                 if(passwordInputBox.getText().toString().equals(result)){
 
                     if(userOrAdminSpinner.getSelectedItem().toString().equals("User")){
                         resultText.setText("Logged in");    //Set the text to Logged in to let the user know
                         Intent intent = new Intent(this, userMainActivity.class);   //Since now the user is logged in, switch over to the user main menu layout
+                      //  intent.putExtra("username", usernameInputBox.getText().toString());
+                        intent.putExtra("first_name", first_name);
+
                         startActivity(intent);
                     }else{
                         resultText.setText("Sorry you are not an admin");
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity{
             resultText.setText("EXPLODED");
 
         }
+
 
 
     }

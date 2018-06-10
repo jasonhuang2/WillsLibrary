@@ -22,6 +22,7 @@ public class userMainActivity extends AppCompatActivity {
 
     Connection conn;
     String un, pass, db, ip;
+    private TextView nameText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,41 +39,13 @@ public class userMainActivity extends AppCompatActivity {
         un = "DB_A3C994_will_admin";    //enter username here
         pass = "willslibrary1";  //enter password here
 
+        String first_name = getIntent().getExtras().getString("first_name");
+
+        nameText = (TextView)findViewById(R.id.nameText);
+        nameText.setText(first_name);
+
         //This is for the back button but I dont think the user's main page needs a back button back to the login page
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-
-        //https://stackoverflow.com/questions/4211189/how-to-get-id-in-different-layout
-        View inflatedView = getLayoutInflater().inflate(R.layout.main_activity, null);  //I did this so I can access the username from the main_activity layout
-        EditText text = (EditText)inflatedView.findViewById(R.id.passwordInputBox);    //Now everything is accessable through text, since text now points to the passwordInputBox from main_activity
-
-        TextView nameText = (TextView)findViewById(R.id.nameText);
-
-
-        /*
-        Don't delete I am trying to do something here, I wanted to print out the name. Will come back to it later.
-        String userName = text.getText().toString();
-        String nameQuery = "SELECT first_name FROM " + db + ".dbo.users WHERE username='" + userName + "' LIMIT 1;";
-
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(nameQuery);
-
-            if(rs.next()){
-
-                String result = rs.getString("first_name");
-
-                nameText.setText(result);
-            }
-
-        }catch (SQLException e){
-            e.printStackTrace();
-
-        }
-
-        */
-
-
     }
 
 
