@@ -8,6 +8,6 @@ public class myrentalMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_myrental_main);
+        setContentView(R.layout.myrental_activity);
     }
 }

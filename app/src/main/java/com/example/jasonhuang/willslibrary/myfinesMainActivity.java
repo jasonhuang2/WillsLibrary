@@ -8,6 +8,6 @@ public class myfinesMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_myfines_main);
+        setContentView(R.layout.myfines_activity);
     }
 }

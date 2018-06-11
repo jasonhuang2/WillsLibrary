@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/titleTextViewBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/authorTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="110dp"
+        android:text="Author:" />
+
+    <TextView
+        android:id="@+id/authorTextViewBox"
+        android:layout_width="283dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/authorTextView"
+        android:layout_marginStart="86dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/genreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/authorTextView"
+        android:layout_marginTop="151dp"
+        android:text="Genre:" />
+
+    <TextView
+        android:id="@+id/publisherTextViewBox"
+        android:layout_width="283dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/authorTextViewBox"
+        android:layout_alignTop="@+id/publisherTextView"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/genreTextViewBox"
+        android:layout_width="283dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/authorTextViewBox"
+        android:layout_alignTop="@+id/genreTextView"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/publisherTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="186dp"
+        android:text="Publisher:" />
+
+    <TextView
+        android:id="@+id/publishingDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/publisherTextView"
+        android:layout_marginTop="215dp"
+        android:text="Dategoeshere" />
+
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="230dp"
+        android:text="Description:" />
+
+    <TextView
+        android:id="@+id/descriptionTextViewBox"
+        android:layout_width="359dp"
+        android:layout_height="143dp"
+        android:layout_below="@+id/descriptionTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-230dp"
+        android:text="TextView" />
+</RelativeLayout>

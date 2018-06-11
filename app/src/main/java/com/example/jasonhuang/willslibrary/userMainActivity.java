@@ -23,7 +23,10 @@ public class userMainActivity extends AppCompatActivity {
 
     Connection conn;
     String un, pass, db, ip;
-    private TextView nameText;
+    private TextView nameText; //Problem: Once this layout is loaded I want it to display "Welcome 'yournamegoeshere'"
+    // But this doesn't work if you try doing a query inside of  the onCreate function.
+    //Solution: I want to do a query in the mainActivity.java which finds out the name depending on the inputted username
+    // I then passed it on into this java and displayed it.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +43,65 @@ public class userMainActivity extends AppCompatActivity {
         un = "DB_A3C994_will_admin";    //enter username here
         pass = "willslibrary1";  //enter password here
 
+        //This part here retrives whatever I passed through from MainActivity.java using the key word, "first_name"
         String first_name = getIntent().getExtras().getString("first_name");
 
+        //Printed it out.
         nameText = (TextView)findViewById(R.id.nameText);
         nameText.setText(first_name);
 
         //This is for the back button but I dont think the user's main page needs a back button back to the login page
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
+
+
+    public void bookLookUpListener(View v){
+        conn = connectionclass(un, pass, db, ip);   //I need this so I can query to the database
+
+        EditText isbnInputBox = (EditText) findViewById(R.id.isbnInputBox);
+
+        String isbn = isbnInputBox.getText().toString();
+
+
+
+
+
+
+        String query = "SELECT * FROM DB_A3C994_will.dbo.book WHERE isbn='" + isbn + "';";
+
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            if(rs.next()){
+
+                String title_string = rs.getString("title");
+                String genre_string = rs.getString("genre");
+                String publisher_string = rs.getString("publisher");
+                String publishing_date_string = rs.getString("publishing_date");
+                String description_string = rs.getString("description");
+
+                Intent itemPage = new Intent(this, itemActivity.class);
+                itemPage.putExtra("title_string", title_string);
+                itemPage.putExtra("genre_string", genre_string);
+                itemPage.putExtra("publisher_string", publisher_string);
+                itemPage.putExtra("publishing_date_string", publishing_date_string);
+                itemPage.putExtra("description_string", description_string);
+
+                startActivity(itemPage);
+
+            }
+
+        }catch(SQLException e){
+
+        }
+
+
+
+    }
+
+
+
 
 
 

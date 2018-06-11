@@ -70,8 +70,7 @@ public class MainActivity extends AppCompatActivity{
                     if(userOrAdminSpinner.getSelectedItem().toString().equals("User")){
                         resultText.setText("Logged in");    //Set the text to Logged in to let the user know
                         Intent intent = new Intent(this, userMainActivity.class);   //Since now the user is logged in, switch over to the user main menu layout
-                      //  intent.putExtra("username", usernameInputBox.getText().toString());
-                        intent.putExtra("first_name", first_name);
+                        intent.putExtra("first_name", first_name); //As explained in userMainActivity, first_name will be stored under the key word "first_name"
 
                         startActivity(intent);
                     }else{
