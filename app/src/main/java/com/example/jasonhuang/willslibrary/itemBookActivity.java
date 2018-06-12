@@ -4,13 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class itemActivity extends AppCompatActivity {
+public class itemBookActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_activity);
-
+        setContentView(R.layout.item_book_activity);
+        setTitle("Book Description");
 
 
         String title_string = getIntent().getExtras().getString("title_string");

@@ -6,12 +6,9 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -48,17 +45,17 @@ public class userMainActivity extends AppCompatActivity {
 
         //Printed it out.
         nameText = (TextView)findViewById(R.id.nameText);
-        nameText.setText(first_name);
+        nameText.setText(first_name + '!');
 
         //This is for the back button but I dont think the user's main page needs a back button back to the login page
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
 
-    public void bookLookUpListener(View v){
+    public void itemLookUpListener(View v){
         conn = connectionclass(un, pass, db, ip);   //I need this so I can query to the database
-
-        EditText isbnInputBox = (EditText) findViewById(R.id.isbnInputBox);
+        //Need to change the names to look up Item IDs (not ISBNs)
+        EditText isbnInputBox = (EditText) findViewById(R.id.itemIDInputBox);
 
         String isbn = isbnInputBox.getText().toString();
 
@@ -66,7 +63,7 @@ public class userMainActivity extends AppCompatActivity {
 
 
 
-
+        //Change Queries
         String query = "SELECT * FROM DB_A3C994_will.dbo.book WHERE isbn='" + isbn + "';";
 
         try{
@@ -81,7 +78,7 @@ public class userMainActivity extends AppCompatActivity {
                 String publishing_date_string = rs.getString("publishing_date");
                 String description_string = rs.getString("description");
 
-                Intent itemPage = new Intent(this, itemActivity.class);
+                Intent itemPage = new Intent(this, itemBookActivity.class);
                 itemPage.putExtra("title_string", title_string);
                 itemPage.putExtra("genre_string", genre_string);
                 itemPage.putExtra("publisher_string", publisher_string);

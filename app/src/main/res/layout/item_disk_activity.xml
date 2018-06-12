@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/disktitleTextViewBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="TextView"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/datereleasedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="110dp"
+        android:layout_toStartOf="@+id/disktitleTextViewBox"
+        android:text="Date Released: "
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dgenreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/genreTextViewBox"
+        android:layout_toStartOf="@+id/disktitleTextViewBox"
+        android:text="Genre:"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/disktypeTextViewBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/genreTextViewBox"
+        android:layout_alignTop="@+id/disktypeTextView"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/genreTextViewBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/publishingDateTextView"
+        android:layout_marginTop="138dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/disktypeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="169dp"
+        android:layout_toStartOf="@+id/disktitleTextViewBox"
+        android:text="Disk Type: "
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/publishingDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/disktitleTextViewBox"
+        android:layout_alignTop="@+id/datereleasedTextView"
+        android:text="Dategoeshere" />
+
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:text="Description:"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/ddescriptionTextViewBox"
+        android:layout_width="300dp"
+        android:layout_height="143dp"
+        android:layout_below="@+id/descriptionTextView"
+        android:layout_centerHorizontal="true"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/disktitleTextViewBox"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/diskimage" />
+</RelativeLayout>

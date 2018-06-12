@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/titleTextViewBox"
@@ -8,8 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/authorTextView"
@@ -17,31 +21,33 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="102dp"
         android:layout_marginTop="110dp"
-        android:text="Author:" />
+        android:text="Author:"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/authorTextViewBox"
-        android:layout_width="283dp"
+        android:layout_width="211dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/authorTextView"
-        android:layout_marginStart="86dp"
+        android:layout_marginStart="158dp"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/genreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/authorTextView"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/authorTextView"
-        android:layout_marginTop="151dp"
-        android:text="Genre:" />
+        android:layout_marginTop="138dp"
+        android:text="Genre:"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/publisherTextViewBox"
-        android:layout_width="283dp"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/authorTextViewBox"
         android:layout_alignTop="@+id/publisherTextView"
@@ -49,7 +55,7 @@
 
     <TextView
         android:id="@+id/genreTextViewBox"
-        android:layout_width="283dp"
+        android:layout_width="211dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/authorTextViewBox"
         android:layout_alignTop="@+id/genreTextView"
@@ -59,36 +65,64 @@
         android:id="@+id/publisherTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/authorTextView"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="186dp"
-        android:text="Publisher:" />
+        android:layout_marginTop="165dp"
+        android:text="Publisher:"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/publishingDateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/publisherTextView"
-        android:layout_marginTop="215dp"
+        android:layout_alignStart="@+id/authorTextViewBox"
+        android:layout_marginTop="193dp"
         android:text="Dategoeshere" />
 
     <TextView
         android:id="@+id/descriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="230dp"
-        android:text="Description:" />
+        android:layout_marginTop="226dp"
+        android:text="Description:"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/descriptionTextViewBox"
-        android:layout_width="359dp"
+        android:layout_width="300dp"
         android:layout_height="143dp"
         android:layout_below="@+id/descriptionTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-230dp"
         android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/titleTextViewBox"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ic_action_name" />
+
+    <TextView
+        android:id="@+id/publishingdatetextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/authorTextView"
+        android:layout_alignTop="@+id/publishingDateTextView"
+        android:text="Published On:"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/descriptionTextViewBox"
+        android:layout_marginBottom="80dp"
+        android:text="Availability"
+        android:textAllCaps="true"
+        android:textColor="@android:color/holo_green_light"
+        android:textStyle="bold" />
 </RelativeLayout>

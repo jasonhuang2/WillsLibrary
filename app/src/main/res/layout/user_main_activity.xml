@@ -64,7 +64,7 @@
         android:text="  " />
 
     <EditText
-        android:id="@+id/isbnInputBox"
+        android:id="@+id/itemIDInputBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -74,20 +74,20 @@
         android:inputType="number" />
 
     <TextView
-        android:id="@+id/bookIDTextView"
+        android:id="@+id/itemIDTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/isbnInputBox"
+        android:layout_above="@+id/itemIDInputBox"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-128dp"
-        android:text="BOOK ISBN" />
+        android:text="ITEM ID NUMBER" />
 
     <Button
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/isbnInputBox"
+        android:layout_below="@+id/itemIDInputBox"
         android:layout_centerHorizontal="true"
-        android:onClick="bookLookUpListener"
+        android:onClick="itemLookUpListener"
         android:text="Search" />
 </RelativeLayout>

@@ -23,7 +23,9 @@
         <activity android:name=".myrentalMainActivity" />
         <activity android:name=".myfinesMainActivity" />
         <activity android:name=".item" />
-        <activity android:name=".itemActivity"></activity>
+        <activity android:name=".itemBookActivity" />
+        <activity android:name=".itemDiskActivity" />
+        <activity android:name=".itemOtherActivity"></activity>
     </application>
 
 </manifest>
