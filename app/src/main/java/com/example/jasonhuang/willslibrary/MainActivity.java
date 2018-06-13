@@ -54,8 +54,68 @@ public class MainActivity extends AppCompatActivity{
         TextView resultText = (TextView) findViewById(R.id.loginTextView2);     //I want to print out the result of entering a username and password and after querying the database
         Spinner userOrAdminSpinner = (Spinner) findViewById(R.id.user_or_admin_spinner);    //The spinner that is used to select what type of user is logging in
 
+        /*userLogin
+         *This is made by the spinner attribute,
+         * This is up to the user select which account that they would wish to login to
+         */
 
-        //The actual query string
+        if(userOrAdminSpinner.getSelectedItem().toString().equals("User")) {
+            String query = "SELECT * FROM DB_A3C994_will.dbo.users WHERE username='" + usernameInputBox.getText().toString()+"';";
+            try {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                if(rs.next()){
+                    String result = rs.getString("password");
+                    String first_name = rs.getString("first_name");
+                    if (passwordInputBox.getText().toString().equals(result)) {
+                        resultText.setText("Logged in");    //Set the text to Logged in to let the user know
+                        Intent intent = new Intent(this, userMainActivity.class);   //Since now the user is logged in, switch over to the user main menu layout
+                        intent.putExtra("first_name", first_name); //As explained in userMainActivity, first_name will be stored under the key word "first_name"
+                        startActivity(intent);
+                    }else {
+                        resultText.setText("Incorrect username or password");
+                    }
+                } else {
+                    resultText.setText("Incorrect username or password");
+                }
+            }catch(SQLException e)
+            {
+                e.printStackTrace();
+                resultText.setText("EXPLODED");
+            }
+        }
+        /*AdminLogin
+         *This is really fleshed out into an else-if for clarity, as we only have two options.
+         *Again this drop down is the user responsibility
+         */
+        else if(userOrAdminSpinner.getSelectedItem().toString().equals("Admin"))
+        {
+            String query = "SELECT * FROM DB_A3C994_will.dbo.admin WHERE username='" + usernameInputBox.getText().toString()+"';";
+            try {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                if(rs.next()){
+                    String result = rs.getString("password");
+                    String first_name = rs.getString("first_name");
+                    if (passwordInputBox.getText().toString().equals(result)) {
+                        //We have stubbed this into, the userland local - untill i can fix it.
+                        resultText.setText("Logged in");    //Set the text to Logged in to let the user know
+                        Intent intent = new Intent(this, userMainActivity.class);   //Since now the user is logged in, switch over to the user main menu layout
+                        intent.putExtra("first_name", first_name); //As explained in userMainActivity, first_name will be stored under the key word "first_name"
+                        startActivity(intent);
+                    }else {
+                        resultText.setText("Incorrect username or password");
+                    }
+                } else {
+                    resultText.setText("Incorrect username or password");
+                }
+            }catch(SQLException e)
+            {
+                e.printStackTrace();
+                resultText.setText("EXPLODED");
+            }
+        }
+       /* //The actual query string
         String query = "SELECT * FROM DB_A3C994_will.dbo.users WHERE username='" + usernameInputBox.getText().toString()+"';";
         try{
             Statement stmt = conn.createStatement();
@@ -74,6 +134,11 @@ public class MainActivity extends AppCompatActivity{
 
                         startActivity(intent);
                     }else{
+                        //We have dropped down into the admin login.
+                       // query = "SELECT username,password FROM DB_A#C994_will.dbo.ADMIN WHERE username='" +usernameInputBox.getText().toString()+"';";
+                       // rs = stmt.executeQuery(query);
+
+
                         resultText.setText("Sorry you are not an admin");
                     }
 
@@ -89,12 +154,11 @@ public class MainActivity extends AppCompatActivity{
             e.printStackTrace();
             resultText.setText("EXPLODED");
 
-        }
+        }*/
 
 
 
     }
-
     //connection class
     @SuppressLint("NewApi")
     public Connection connectionclass (String user, String pass, String db, String server){
