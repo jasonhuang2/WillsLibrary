@@ -19,9 +19,9 @@ public class itemDiskActivity extends AppCompatActivity {
         String description_string = getIntent().getExtras().getString("description_string");
 
         TextView titleNameBox = (TextView)findViewById(R.id.disktitleTextViewBox);
-        TextView genreBox = (TextView)findViewById(R.id.dgenreTextView);
-        TextView datereleasedBox = (TextView)findViewById(R.id.datereleasedTextView);
-        TextView disktypeBox = (TextView)findViewById(R.id.disktypeTextView);
+        TextView genreBox = (TextView)findViewById(R.id.genreTextViewBox);
+        TextView datereleasedBox = (TextView)findViewById(R.id.date_releasedTextView);
+        TextView disktypeBox = (TextView)findViewById(R.id.disktypeTextViewBox);
         TextView descriptionBox = (TextView)findViewById(R.id.ddescriptionTextViewBox);
 
         titleNameBox.setText(title_string);
