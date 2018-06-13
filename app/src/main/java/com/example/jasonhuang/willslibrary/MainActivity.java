@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -115,49 +116,15 @@ public class MainActivity extends AppCompatActivity{
                 resultText.setText("EXPLODED");
             }
         }
-       /* //The actual query string
-        String query = "SELECT * FROM DB_A3C994_will.dbo.users WHERE username='" + usernameInputBox.getText().toString()+"';";
-        try{
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
 
+    }
 
-            if(rs.next()){
-                String result = rs.getString("password");
-                String first_name = rs.getString("first_name");
-                if(passwordInputBox.getText().toString().equals(result)){
-
-                    if(userOrAdminSpinner.getSelectedItem().toString().equals("User")){
-                        resultText.setText("Logged in");    //Set the text to Logged in to let the user know
-                        Intent intent = new Intent(this, userMainActivity.class);   //Since now the user is logged in, switch over to the user main menu layout
-                        intent.putExtra("first_name", first_name); //As explained in userMainActivity, first_name will be stored under the key word "first_name"
-
-                        startActivity(intent);
-                    }else{
-                        //We have dropped down into the admin login.
-                       // query = "SELECT username,password FROM DB_A#C994_will.dbo.ADMIN WHERE username='" +usernameInputBox.getText().toString()+"';";
-                       // rs = stmt.executeQuery(query);
-
-
-                        resultText.setText("Sorry you are not an admin");
-                    }
-
-                }else{
-                    resultText.setText("Incorrect username or password");
-                }
-
-            }else{
-                resultText.setText("Incorrect username or password");
-            }
-
-        }catch (SQLException e){
-            e.printStackTrace();
-            resultText.setText("EXPLODED");
-
-        }*/
-
-
-
+    public void addUserClick(View v)
+    {
+        TextView resultText = (TextView) findViewById(R.id.loginTextView2);
+        resultText.setText("Redirecting to user Creation page.");
+        Intent userCreation = new Intent(this,userCreationActivity.class);
+        startActivity(userCreation);
     }
     //connection class
     @SuppressLint("NewApi")
