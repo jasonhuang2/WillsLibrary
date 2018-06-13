@@ -25,7 +25,8 @@
         <activity android:name=".item" />
         <activity android:name=".itemBookActivity" />
         <activity android:name=".itemDiskActivity" />
-        <activity android:name=".itemOtherActivity"></activity>
+        <activity android:name=".itemOtherActivity" />
+        <activity android:name=".userCreationActivity"></activity>
     </application>
 
 </manifest>

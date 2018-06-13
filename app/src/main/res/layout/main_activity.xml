@@ -66,9 +66,10 @@
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/passwordInputBox"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="-125dp"
         android:onClick="loginButtonClick"
         android:text="login" />
 
@@ -80,5 +81,15 @@
         android:layout_centerHorizontal="true"
         android:entries="@array/adminUserListString"
         android:layout_marginTop="141dp" />
+
+    <Button
+        android:id="@+id/newUser_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/title_Text"
+        android:layout_below="@+id/passwordInputBox"
+        android:layout_marginTop="-125dp"
+        android:onClick="addUserClick"
+        android:text="Add User" />
 
 </RelativeLayout>
