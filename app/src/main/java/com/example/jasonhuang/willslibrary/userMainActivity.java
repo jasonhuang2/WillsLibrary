@@ -54,24 +54,133 @@ public class userMainActivity extends AppCompatActivity {
 
     public void itemLookUpListener(View v){
         conn = connectionclass(un, pass, db, ip);   //I need this so I can query to the database
-        //Need to change the names to look up Item IDs (not ISBNs)
-        EditText isbnInputBox = (EditText) findViewById(R.id.itemIDInputBox);
+        //Gets the input from the itemID input box
+        EditText itemIDInputBox = (EditText) findViewById(R.id.itemIDInputBox);
 
-        String isbn = isbnInputBox.getText().toString();
-
-
-
-
-
-        //Change Queries
-        String query = "SELECT * FROM DB_A3C994_will.dbo.book WHERE isbn='" + isbn + "';";
+        String itemID = itemIDInputBox.getText().toString();
+        Log.d("query", "ITEMID: " + itemID);
+        //First Query to obtain the item type
+        //Creating the query to obtain the type
+        String itemquery = "SELECT * FROM DB_A3C994_will.dbo.item WHERE item_id='" + itemID + "';";
 
         try{
+            Statement itemstmt = conn.createStatement();
+            ResultSet itemrs = itemstmt.executeQuery(itemquery);
+            Log.d("query", "Sending Query");
+            //If the query returns a response
+            if(itemrs.next()){
+                //Obtain the type from the response
+                String item_type = itemrs.getString("type");
+                String item_status = itemrs.getString("status");
+                String item_image = itemrs.getString("image");
+                Log.d("query", "Received Response: " + item_type);
+                //Do further querying to obtain Book information
+                if(item_type.equals("Book")){
+                    String isbn = itemrs.getString("b_isbn");
+
+                    String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book WHERE isbn='" + isbn + "';";
+                    //Obtaining information for the book
+                    try{
+                        Statement bookstmt = conn.createStatement();
+                        ResultSet bookrs = bookstmt.executeQuery(bookquery);
+
+                        if(bookrs.next()){
+                            String title_string = bookrs.getString("title");
+                            String genre_string = bookrs.getString("genre");
+                            String publisher_string = bookrs.getString("publisher");
+                            String publishing_date_string = bookrs.getString("publishing_date");
+                            String description_string = bookrs.getString("description");
+                            //Passing the information to the activity to be displayed
+                            Intent itemBookPage = new Intent(this, itemBookActivity.class);
+                            itemBookPage.putExtra("title_string", title_string);
+                            itemBookPage.putExtra("genre_string", genre_string);
+                            itemBookPage.putExtra("publisher_string", publisher_string);
+                            itemBookPage.putExtra("publishing_date_string", publishing_date_string);
+                            itemBookPage.putExtra("description_string", description_string);
+
+                            startActivity(itemBookPage);
+                        }
+                        else{
+                            Log.d("query", "Book does not exist in the database");
+                        }
+                    } catch (SQLException e){
+                        Log.d("query", "Query Failed");
+                    }
+                }
+                else if(item_type.equals("Disk"))
+                {
+                    String d_title = itemrs.getString("d_title");
+                    String d_date_released = itemrs.getString("d_date_released");
+
+                    String diskquery = "SELECT * FROM DB_A3C994_will.dbo.disk WHERE title='" + d_title + "' AND date_released='" + d_date_released + "';";
+                    try{
+                        Statement diskstmt = conn.createStatement();
+                        ResultSet diskrs = diskstmt.executeQuery(diskquery);
+
+                        if(diskrs.next()){
+                            String title_string = diskrs.getString("title");
+                            String datereleased_string = diskrs.getString("date_released");
+                            String genre_string = diskrs.getString("genre");
+                            String disktype_string = diskrs.getString("disk_type");
+                            String description_string = diskrs.getString("description");
+
+                            Intent itemDiskPage = new Intent(this, itemDiskActivity.class);
+                            itemDiskPage.putExtra("title_string", title_string);
+                            itemDiskPage.putExtra("genre_string", genre_string);
+                            itemDiskPage.putExtra("datereleased_string", datereleased_string);
+                            itemDiskPage.putExtra("disktype_string", disktype_string);
+                            itemDiskPage.putExtra("description_string", description_string);
+
+                            startActivity(itemDiskPage);
+                        }
+                        else{
+                            Log.d("query", "Disk does not exist in the database");
+                        }
+                    } catch (SQLException e){
+                        Log.d("query", "Query Failed");
+                    }
+                }
+                else if(item_type.equals("Other"))
+                {
+                    String o_other_id = itemrs.getString("o_other_id");
+
+                    String otherquery = "SELECT * FROM DB_A3C994_will.dbo.other WHERE other_id='" + o_other_id + "';";
+                    try{
+                        Statement otherstmt = conn.createStatement();
+                        ResultSet otherrs = otherstmt.executeQuery(otherquery);
+
+                        if(otherrs.next()){
+                            String type_string = otherrs.getString("type");
+                            String description_string = otherrs.getString("description");
+
+                            Intent itemOtherPage = new Intent(this, itemOtherActivity.class);
+                            itemOtherPage.putExtra("type_string", type_string);
+                            itemOtherPage.putExtra("description_string", description_string);
+
+                            startActivity(itemOtherPage);
+                        }
+                        else{
+                            Log.d("query", "Other Item does not exist in the database");
+                        }
+                    } catch (SQLException e){
+                        Log.d("query", "Query Failed");
+                    }
+                }
+            }
+            else{
+                Log.d("query", "Item does not exist in the database");
+
+            }
+        } catch(SQLException e){
+
+        }
+        /*
+        try{
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-
+            ResultSet rs = stmt.executeQuery(itemquery);
+            Log.d("query", "Sent Query");
             if(rs.next()){
-
+                Log.d("query", "Received Response from Query");
                 String title_string = rs.getString("title");
                 String genre_string = rs.getString("genre");
                 String publisher_string = rs.getString("publisher");
@@ -90,9 +199,9 @@ public class userMainActivity extends AppCompatActivity {
             }
 
         }catch(SQLException e){
-
+            Log.d("query", "Query Failed");
         }
-
+        */
 
 
     }
