@@ -78,7 +78,10 @@ public class userMainActivity extends AppCompatActivity {
                 if(item_type.equals("Book")){
                     String isbn = itemrs.getString("b_isbn");
 
-                    String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book WHERE isbn='" + isbn + "';";
+                    //String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book WHERE isbn='" + isbn + "';";
+                    //I decided to join the book and author table in order to retrieve the author's name.
+                    //https://www.youtube.com/watch?v=2HVMiPPuPIM is an extremely helpful vid on JOINS, very clear.
+                    String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book INNER JOIN DB_A3C994_will.dbo.author ON DB_A3C994_will.dbo.book.isbn = DB_A3C994_will.dbo.author.b_isbn WHERE isbn='" + isbn + "';";
                     //Obtaining information for the book
                     try{
                         Statement bookstmt = conn.createStatement();
@@ -86,6 +89,7 @@ public class userMainActivity extends AppCompatActivity {
 
                         if(bookrs.next()){
                             String title_string = bookrs.getString("title");
+                            String author_string = bookrs.getString("author_name");
                             String genre_string = bookrs.getString("genre");
                             String publisher_string = bookrs.getString("publisher");
                             String publishing_date_string = bookrs.getString("publishing_date");
@@ -97,6 +101,11 @@ public class userMainActivity extends AppCompatActivity {
                             itemBookPage.putExtra("publisher_string", publisher_string);
                             itemBookPage.putExtra("publishing_date_string", publishing_date_string);
                             itemBookPage.putExtra("description_string", description_string);
+                            itemBookPage.putExtra("status_string", item_status);
+                            itemBookPage.putExtra("author_name_string", author_string);
+
+
+
 
                             startActivity(itemBookPage);
                         }
