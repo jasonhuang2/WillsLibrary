@@ -241,8 +241,10 @@ public class userMainActivity extends AppCompatActivity {
     }
     //Going to the Catalogue page
     public void catalogueClick(View v){
-        Intent catalogueI = new Intent(this, catalogueMainActivity.class);
-        startActivity(catalogueI);
+        //Intent catalogueI = new Intent(this, catalogueMainActivity.class);
+        //startActivity(catalogueI);
+        Intent catalogue2 = new Intent(this, catalogue2Activity.class);
+        startActivity(catalogue2);
     }
     //Going to the My Rentals page
     public void my_rental_Click(View v){
