@@ -1,6 +1,7 @@
 package com.example.jasonhuang.willslibrary;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import java.sql.Statement;
 
 public class MainActivity extends AppCompatActivity{
 
+    public static final int REQUEST_CODE_USER_CREATION = 1001;
     Connection conn;
     String un, pass, db, ip;
 
@@ -119,12 +121,32 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(requestCode){
+            case REQUEST_CODE_USER_CREATION:
+                if(resultCode == Activity.RESULT_OK){
+                    CharSequence username = data.getStringExtra("usernameInputBox");
+                    String message = data.getStringExtra("loginTextView2");
+                    CharSequence password = data.getStringExtra("passwordInputBox");
+
+                    TextView resultText = (TextView) findViewById(R.id.loginTextView2);
+                    EditText passBox = (EditText) findViewById(R.id.passwordInputBox);
+                    EditText userBox =(EditText) findViewById(R.id.usernameInputBox);
+                    resultText.setText(message);
+                    passBox.setText(password);
+                    userBox.setText(username);
+
+                }
+        }
+    }
+
     public void addUserClick(View v)
     {
         TextView resultText = (TextView) findViewById(R.id.loginTextView2);
         resultText.setText("Redirecting to user Creation page.");
         Intent userCreation = new Intent(this,userCreationActivity.class);
-        startActivity(userCreation);
+        startActivityForResult(userCreation, REQUEST_CODE_USER_CREATION);
     }
     //connection class
     @SuppressLint("NewApi")
