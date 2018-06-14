@@ -27,7 +27,10 @@
         <activity android:name=".itemDiskActivity" />
         <activity android:name=".itemOtherActivity" />
         <activity android:name=".userCreationActivity" />
-        <activity android:name=".catalogue2Activity"></activity>
+        <activity
+            android:name=".catalogueTabActivity"
+            android:label="@string/title_activity_catalogue_tab"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
