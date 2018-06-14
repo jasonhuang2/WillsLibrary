@@ -1,6 +1,7 @@
 package com.example.jasonhuang.willslibrary;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -87,7 +88,13 @@ public class userCreationActivity extends AppCompatActivity {
             errorBox.setText("Please Check your network connection");
             return;
         }
-
+        //So I don't know why this is not working
+        //I copied this right from you guys.
+        Intent mainActivity = new Intent(this, MainActivity.class);
+        mainActivity.putExtra("usernameInputBox", username.getText().toString());
+        mainActivity.putExtra("passwordInputBox","");
+        mainActivity.putExtra("loginTextView2","Enter your password to continue");
+        startActivity(mainActivity);
 
     }
     //connection class
