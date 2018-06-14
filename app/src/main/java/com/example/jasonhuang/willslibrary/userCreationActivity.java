@@ -63,9 +63,10 @@ public class userCreationActivity extends AppCompatActivity {
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            errorBox.setText(sm.format(Calendar.getInstance().getTime()));
+            //errorBox.setText(sm.format(Calendar.getInstance().getTime()));
             if(rs.next()) {
                 errorBox.setText("Please select a new username");
+                return;
             }
             query = "INSERT INTO DB_A3C994_will.dbo.users (username,password,creation_date,address,first_name,last_name,amount_of_money,a_username) VALUES ('" + username.getText().toString() + "','"
                     + password.getText().toString() + "','" +
@@ -75,12 +76,13 @@ public class userCreationActivity extends AppCompatActivity {
                     lastName.getText().toString() + "'," +
                     0.00 + "," +
                     "'ADMIN');";
-            errorBox.setText(query);
-            //stmt.executeQuery(query);
+            //errorBox.setText(query);
+            stmt.execute(query);
             //INSERT INTO USERS (username,password,creation_date,address,first_name,last_name,amount_of_money,a_username) VALUES ('h','','2018-06-13','p','p','p',0.00,'ADMIN');
         }
         catch(SQLException e)
         {
+            //errorBox.setText(e.getMessage());
             e.printStackTrace();
             errorBox.setText("Please Check your network connection");
             return;
