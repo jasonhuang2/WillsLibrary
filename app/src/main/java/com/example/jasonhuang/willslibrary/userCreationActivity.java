@@ -1,6 +1,7 @@
 package com.example.jasonhuang.willslibrary;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.sql.Connection;
@@ -90,13 +92,25 @@ public class userCreationActivity extends AppCompatActivity {
         }
         //So I don't know why this is not working
         //I copied this right from you guys.
-        Intent mainActivity = new Intent(this, MainActivity.class);
-        mainActivity.putExtra("usernameInputBox", username.getText().toString());
-        mainActivity.putExtra("passwordInputBox","");
-        mainActivity.putExtra("loginTextView2","Enter your password to continue");
-        startActivity(mainActivity);
+        /*Intent mainActivity = new Intent(this, MainActivity.class);
+        String usernameInputBox = username.getText().toString();
+        String passwordInputBox = "";
+        String loginTextView2 = "Enter your password to continue";
+        mainActivity.putExtra("usernameInputBox", usernameInputBox);
+        mainActivity.putExtra("passwordInputBox",passwordInputBox);
+        mainActivity.putExtra("loginTextView2",loginTextView2);
+        startActivity(mainActivity);*/
+        Intent intent = new Intent();
+        intent.putExtra("usernameInputBox",username.getText().toString());
+        intent.putExtra("passwordInputBox","");
+        intent.putExtra("loginTextView2","Please login to continue");
+        setResult(Activity.RESULT_OK,intent);
+        finish();
 
     }
+
+
+
     //connection class
     @SuppressLint("NewApi")
     public Connection connectionclass (String user, String pass, String db, String server){
