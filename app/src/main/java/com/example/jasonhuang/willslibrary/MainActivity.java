@@ -153,6 +153,8 @@ public class MainActivity extends AppCompatActivity{
 
 
 
+                else if(resultCode == Activity.RESULT_CANCELED)
+                    Log.d("ERROR","User Exited task");
         }
     }
 
