@@ -1,6 +1,8 @@
 package com.example.jasonhuang.willslibrary;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
     private String bookid;
     private String booktitle;
     private String bookauthor;
