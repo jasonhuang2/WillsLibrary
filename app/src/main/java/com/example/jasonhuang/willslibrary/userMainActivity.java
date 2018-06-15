@@ -1,14 +1,26 @@
 package com.example.jasonhuang.willslibrary;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+
+import com.google.zxing.Result;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +28,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class userMainActivity extends AppCompatActivity {
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
+
+
+
+public class userMainActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
     Connection conn;
     String un, pass, db, ip;
@@ -24,6 +41,9 @@ public class userMainActivity extends AppCompatActivity {
     // But this doesn't work if you try doing a query inside of  the onCreate function.
     //Solution: I want to do a query in the mainActivity.java which finds out the name depending on the inputted username
     // I then passed it on into this java and displayed it.
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    private ZXingScannerView zXingScannerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +61,28 @@ public class userMainActivity extends AppCompatActivity {
         pass = "willslibrary1";  //enter password here
 
         //This part here retrives whatever I passed through from MainActivity.java using the key word, "first_name"
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        RelativeLayout mFrame = (RelativeLayout)inflater.inflate(R.layout.main_activity, null);
+
         String first_name = getIntent().getExtras().getString("first_name");
+        first_name = getIntent().getExtras().getString("first_name");
 
         //Printed it out.
         nameText = (TextView)findViewById(R.id.nameText);
         nameText.setText(first_name + '!');
 
-        //This is for the back button but I dont think the user's main page needs a back button back to the login page
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        EditText itemIDInputBox = (EditText) findViewById(R.id.itemIDInputBox);
+        itemIDInputBox.setText(getIntent().getExtras().getString("asdfasdfasdf"));
+
+
+    }
+    
+
+    public void barcodeScannerListener(View v){
+        ActivityCompat.requestPermissions(userMainActivity.this,
+                new String[]{Manifest.permission.CAMERA},
+                MY_PERMISSIONS_REQUEST_CAMERA);
     }
 
 
@@ -214,6 +248,61 @@ public class userMainActivity extends AppCompatActivity {
 
 
     }
+
+
+/*
+
+    //The following bottom code will be responsible for the barcode scanner.
+    public void scan(View view){
+        zXingScannerView = new ZXingScannerView(getApplicationContext());
+        setContentView(zXingScannerView);
+        zXingScannerView.setResultHandler(this);
+        zXingScannerView.startCamera();
+
+    }
+    */
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA) {
+
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                zXingScannerView =new ZXingScannerView(getApplicationContext());
+                setContentView(zXingScannerView);
+                zXingScannerView.setResultHandler(this);
+                zXingScannerView.startCamera();
+                Toast.makeText(this, "Camera Permission Granted. Please Scan Barcode.", Toast.LENGTH_LONG).show();
+
+            } else {
+
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+
+            }
+
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //zXingScannerView.stopCamera();
+    }
+
+
+    @Override
+    public void handleResult(Result result) {
+        Toast.makeText(getApplicationContext(),result.getText(),Toast.LENGTH_SHORT).show();
+        Intent backToUserMainActivity = new Intent (this, userMainActivity.class);
+        backToUserMainActivity.putExtra("asdfasdfasdf", result.getText().toString());
+        startActivity(backToUserMainActivity);
+       // zXingScannerView.resumeCameraPreview(this);
+
+    }
+
+
 
 
 
