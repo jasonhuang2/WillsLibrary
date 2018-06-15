@@ -96,10 +96,9 @@
         android:id="@+id/barcodeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="202dp"
-        android:layout_toEndOf="@+id/itemIDTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/itemIDInputBox"
         android:onClick="barcodeScannerListener"
-        android:text="Button" />
+        android:text="BARCODE" />
 
 </RelativeLayout>

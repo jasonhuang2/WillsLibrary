@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -13,8 +14,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,8 +32,6 @@ import java.sql.Statement;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 
-
-
 public class userMainActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
     Connection conn;
@@ -43,6 +42,8 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
     // I then passed it on into this java and displayed it.
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     private ZXingScannerView zXingScannerView;
+
+    String first_name;
 
 
     @Override
@@ -64,7 +65,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         RelativeLayout mFrame = (RelativeLayout)inflater.inflate(R.layout.main_activity, null);
 
-        String first_name = getIntent().getExtras().getString("first_name");
+        //String first_name = getIntent().getExtras().getString("first_name");
         first_name = getIntent().getExtras().getString("first_name");
 
         //Printed it out.
@@ -72,13 +73,20 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
         nameText.setText(first_name + '!');
 
 
+        //The result from the barcode scanner. Once the user finishes scanning, the result of that barcode
+        //Will be in the itemID inputbox. All use has to do is press SEARCH
+        //.setText (.getExtras()) I just combined it all within one sentence.
         EditText itemIDInputBox = (EditText) findViewById(R.id.itemIDInputBox);
-        itemIDInputBox.setText(getIntent().getExtras().getString("asdfasdfasdf"));
+        itemIDInputBox.setText(getIntent().getExtras().getString("Barcode_Result"));
 
 
     }
-    
 
+
+    /**
+     * This is the listening function for the barcode scanner
+     * User must have camera permissions on
+     */
     public void barcodeScannerListener(View v){
         ActivityCompat.requestPermissions(userMainActivity.this,
                 new String[]{Manifest.permission.CAMERA},
@@ -249,61 +257,57 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
 
     }
 
-
-/*
-
-    //The following bottom code will be responsible for the barcode scanner.
-    public void scan(View view){
-        zXingScannerView = new ZXingScannerView(getApplicationContext());
-        setContentView(zXingScannerView);
-        zXingScannerView.setResultHandler(this);
-        zXingScannerView.startCamera();
-
-    }
-    */
-
+    /**
+     * This function is part of the barcode scanner
+     * If permissions are granted then start the zXingScannerView (which reads barcode from Android)
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA) {
-
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 zXingScannerView =new ZXingScannerView(getApplicationContext());
                 setContentView(zXingScannerView);
                 zXingScannerView.setResultHandler(this);
                 zXingScannerView.startCamera();
-                Toast.makeText(this, "Camera Permission Granted. Please Scan Barcode.", Toast.LENGTH_LONG).show();
-
+                Toast.makeText(this, "Camera permission granted, Please scan barcode.", Toast.LENGTH_LONG).show();
             } else {
-
-                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
-
+                Toast.makeText(this, "Camera permission denied, please enable permissions to use camera.", Toast.LENGTH_LONG).show();
             }
-
         }
     }
 
+    /**
+     * Pretty annoying, just ignore what this does. The camera requires this
+     * function to run
+     */
     @Override
     protected void onPause() {
         super.onPause();
-        //zXingScannerView.stopCamera();
     }
 
-
+    /**
+     * This function is very important. It handles the result from the barcode scanner.
+     * The barcode result number will be stored within "result"
+     * I just made an new activity back to the user main menu with barcode number in the item id box.
+     */
     @Override
     public void handleResult(Result result) {
         Toast.makeText(getApplicationContext(),result.getText(),Toast.LENGTH_SHORT).show();
         Intent backToUserMainActivity = new Intent (this, userMainActivity.class);
-        backToUserMainActivity.putExtra("asdfasdfasdf", result.getText().toString());
+        backToUserMainActivity.putExtra("Barcode_Result", result.getText().toString());
+        backToUserMainActivity.putExtra("first_name", first_name);
+        zXingScannerView.stopCamera();
+
         startActivity(backToUserMainActivity);
        // zXingScannerView.resumeCameraPreview(this);
 
     }
-
-
-
 
 
 
