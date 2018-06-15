@@ -2,6 +2,7 @@ package com.example.jasonhuang.willslibrary;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -222,6 +223,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
                 Log.d("query", "Item does not exist in the database");
 
             }
+            conn.close();
         } catch(SQLException e){
 
         }
@@ -253,10 +255,14 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
             Log.d("query", "Query Failed");
         }
         */
-
-
     }
 
+    public void logoutListener(View v)
+    {
+        Intent dummy = new Intent();
+        setResult(Activity.RESULT_OK,dummy);
+        finish();
+    }
     /**
      * This function is part of the barcode scanner
      * If permissions are granted then start the zXingScannerView (which reads barcode from Android)
@@ -300,7 +306,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
     public void handleResult(Result result) {
         Toast.makeText(getApplicationContext(),result.getText(),Toast.LENGTH_SHORT).show();
         Intent backToUserMainActivity = new Intent (this, userMainActivity.class);
-        backToUserMainActivity.putExtra("Barcode_Result", result.getText().toString());
+        backToUserMainActivity.putExtra("Barcode_Result", result.getText());
         backToUserMainActivity.putExtra("first_name", first_name);
         zXingScannerView.stopCamera();
 
