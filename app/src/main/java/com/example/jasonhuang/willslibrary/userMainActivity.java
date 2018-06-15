@@ -28,6 +28,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -104,6 +105,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
         //First Query to obtain the item type
         //Creating the query to obtain the type
         String itemquery = "SELECT * FROM DB_A3C994_will.dbo.item WHERE item_id='" + itemID + "';";
+        //String authorquery = "SELECT AUTHOR.author_name FROM ITEM INNER JOIN AUTHOR on AUTHOR.b_isbn = ITEM.b_isbn WHERE item_id ="+ itemID + ";";
 
         try{
             Statement itemstmt = conn.createStatement();
@@ -123,7 +125,10 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
                     //String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book WHERE isbn='" + isbn + "';";
                     //I decided to join the book and author table in order to retrieve the author's name.
                     //https://www.youtube.com/watch?v=2HVMiPPuPIM is an extremely helpful vid on JOINS, very clear.
-                    String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book INNER JOIN DB_A3C994_will.dbo.author ON DB_A3C994_will.dbo.book.isbn = DB_A3C994_will.dbo.author.b_isbn WHERE isbn='" + isbn + "';";
+                    //String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book INNER JOIN DB_A3C994_will.dbo.author ON DB_A3C994_will.dbo.book.isbn = DB_A3C994_will.dbo.author.b_isbn WHERE isbn='" + isbn + "';";
+                    String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book WHERE isbn='" + isbn + "';";
+                    String authorquery = "SELECT * FROM DB_A3C994_will.dbo.author WHERE b_isbn='" + isbn + "';";
+
                     //Obtaining information for the book
                     try{
                         Statement bookstmt = conn.createStatement();
@@ -131,12 +136,23 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
 
                         if(bookrs.next()){
                             String title_string = bookrs.getString("title");
-                            String author_string = bookrs.getString("author_name");
                             String genre_string = bookrs.getString("genre");
                             String publisher_string = bookrs.getString("publisher");
                             String publishing_date_string = bookrs.getString("publishing_date");
                             String description_string = bookrs.getString("description");
                             //Passing the information to the activity to be displayed
+                            ArrayList<String> authorarray = new ArrayList<String>();
+                            ResultSet authorrs = bookstmt.executeQuery(authorquery);
+                            while(authorrs.next()){
+                                authorarray.add(authorrs.getString("author_name"));
+                            }
+                            String author_string = "";
+                            for(int i = 0; i < authorarray.size(); i++)
+                            {
+                                author_string = author_string + authorarray.get(i) + ", ";
+                            }
+                            author_string = author_string.substring(0, author_string.length()-2);
+
                             Intent itemBookPage = new Intent(this, itemBookActivity.class);
                             itemBookPage.putExtra("title_string", title_string);
                             itemBookPage.putExtra("genre_string", genre_string);
