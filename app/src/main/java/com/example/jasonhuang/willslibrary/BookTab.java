@@ -79,7 +79,7 @@ public class BookTab extends Fragment {
                 Log.d("query", "Image URL: " + rs1.getString(12));
             }
             */
-
+            conn.close();
             //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, bookstitle);
         }catch (SQLException e){
             Log.d("query", "Query of BookTab Failed");

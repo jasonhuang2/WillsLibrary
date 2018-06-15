@@ -101,4 +101,14 @@
         android:onClick="barcodeScannerListener"
         android:text="BARCODE" />
 
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/catalogue_button"
+        android:layout_marginBottom="17dp"
+        android:onClick="logoutListener"
+        android:text="Logout" />
+
 </RelativeLayout>
