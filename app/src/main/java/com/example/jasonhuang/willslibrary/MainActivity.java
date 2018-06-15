@@ -138,6 +138,8 @@ public class MainActivity extends AppCompatActivity{
                     userBox.setText(username);
 
                 }
+                else if(resultCode == Activity.RESULT_CANCELED)
+                    Log.d("ERROR","User Exited task");
         }
     }
 
