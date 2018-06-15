@@ -13,9 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -24,7 +26,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookTab extends Fragment {
+public class BookTab extends Fragment  {
     Connection conn;
     String un, pass, db, ip;
     private ListView lv;
@@ -33,6 +35,8 @@ public class BookTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         //BOOK CLIENT STUFF
         //NOTE: Fill these attributes before you execute this program
         //NOTE: For ip address, if you are provided with a port number, the format will be "ipaddress:portnumber"
@@ -57,10 +61,11 @@ public class BookTab extends Fragment {
             Log.d("query", "Sent book query");
             Log.d("query", "Getting response from Book Query");
             int numbooks = rs.getFetchSize();
-            while(rs.next()){
+            while (rs.next()) {
                 Book book = new Book();
                 book.setBookTitle(rs.getString(2));
                 book.setBookGenre(rs.getString(3));
+
                 //Print to Log
                 Log.d("query", "Title: " + rs.getString(2));
                 Log.d("query", "Genre: " + rs.getString(3));
@@ -81,28 +86,32 @@ public class BookTab extends Fragment {
             */
             conn.close();
             //ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, bookstitle);
-        }catch (SQLException e){
+        } catch (SQLException e) {
             Log.d("query", "Query of BookTab Failed");
         }
         bookAdapter = new BookAdapter(getContext(), books);
         lv.setAdapter(bookAdapter);
-        //setupBookSelectedListener();
-        return rootView;
-    }
-    /*
-    public void setupBookSelectedListener() {
-        lv.setOnClickListener(new AdapterView.OnItemClickListener() {
-            ;
+        setupBookSelectedListener();
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(this, itemBookActivity.class);
-                intent.putExtra("book", bookAdapter.getItem(position));
-                startActivity(intent);
+
+        return rootView;
+
+    }
+
+    public void setupBookSelectedListener() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> parent,View v,int position,long id)
+            {
+                //I no longer know what book i clicked on?
+                Intent intent = new Intent(getActivity(),itemBookActivity.class);
+                intent.putExtra("book",(Serializable) bookAdapter.getItem(position));
+               // Log.i("message",bookAdapter.getItem(position));
+                getActivity().startActivity(intent);
             }
         });
     }
-    */
+
+
     //connection class
     @SuppressLint("NewApi")
     public Connection connectionclass (String user, String pass, String db, String server){

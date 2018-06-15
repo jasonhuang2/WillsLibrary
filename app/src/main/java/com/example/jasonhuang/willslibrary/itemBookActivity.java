@@ -16,7 +16,7 @@ public class itemBookActivity extends AppCompatActivity {
         setContentView(R.layout.item_book_activity);
         setTitle("Book Description");
 
-
+        /*
         String title_string = getIntent().getExtras().getString("title_string");
         String author_string = getIntent().getExtras().getString("author_string");
         String genre_string = getIntent().getExtras().getString("genre_string");
@@ -24,7 +24,10 @@ public class itemBookActivity extends AppCompatActivity {
         String publishing_date_string = getIntent().getExtras().getString("publishing_date_string");
         String description_string = getIntent().getExtras().getString("description_string");
         String status_string = getIntent().getExtras().getString("status_string");
-        String author_name_string = getIntent().getExtras().getString("author_name_string");
+        String author_name_string = getIntent().getExtras().getString("author_name_string");*/
+        String status_string="In_Store";
+        Book book = (Book) getIntent().getSerializableExtra("book");
+
 
 
         TextView titleNameBox = (TextView)findViewById(R.id.titleTextViewBox);
@@ -33,15 +36,15 @@ public class itemBookActivity extends AppCompatActivity {
         TextView publisherBox = (TextView)findViewById(R.id.publisherTextViewBox);
         TextView publishing_date_Box = (TextView)findViewById(R.id.publishingDateTextView);
         TextView descriptionBox = (TextView)findViewById(R.id.descriptionTextViewBox);
-        TextView authorTextBox = (TextView)findViewById(R.id.authorTextViewBox);
+        //TextView authorTextBox = (TextView)findViewById(R.id.authorTextViewBox);
 
-        titleNameBox.setText(title_string);
-        authorBox.setText(author_string);
-        genreBox.setText(genre_string);
-        publisherBox.setText(publisher_string);
-        publishing_date_Box.setText(publishing_date_string);
-        descriptionBox.setText(description_string);
-        authorTextBox.setText(author_name_string);
+        titleNameBox.setText(book.getBookTitle());
+        authorBox.setText(book.getBookAuthor());
+        genreBox.setText(book.getBookGenre());
+        publisherBox.setText("");
+        publishing_date_Box.setText("");
+        descriptionBox.setText("");
+        //authorTextBox.setText(author_name_string);
 
 
         TextView availableForRentText = (TextView)findViewById(R.id.availableForRentText);
