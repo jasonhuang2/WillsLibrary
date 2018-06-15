@@ -141,15 +141,13 @@ public class MainActivity extends AppCompatActivity{
                     userBox.setText(username);
 
                 }
-                else if(resultCode == Activity.RESULT_CANCELED) {
-
-
-                    Log.i("message", "user cancelled activity.");
-                }
+                else if(resultCode == Activity.RESULT_CANCELED)
+                    Log.d("ERROR","User Exited task");
             case USER_LOGOUT:
                 resultText.setText("Who are you?");
                 userBox.setText("");
                 passBox.setText("");
+
 
 
 

@@ -11,9 +11,10 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class BookAdapter extends ArrayAdapter<Book> {
+public class BookAdapter extends ArrayAdapter<Book>  {
 
     private static class ViewHolder{
         public ImageView ivCover;
@@ -47,4 +48,5 @@ public class BookAdapter extends ArrayAdapter<Book> {
         //Do the same for image
         return convertView;
     }
+
 }
