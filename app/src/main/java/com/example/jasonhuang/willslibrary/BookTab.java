@@ -55,6 +55,7 @@ public class BookTab extends Fragment  {
         String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book;";
         String imagequery = "SELECT image FROM DB_A3C994_will.dbo.item WHERE b_isbn IS NOT NULL;";
 
+
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(bookquery);
@@ -63,12 +64,45 @@ public class BookTab extends Fragment  {
             int numbooks = rs.getFetchSize();
             while (rs.next()) {
                 Book book = new Book();
+                book.setBookISBN(rs.getString(1));
                 book.setBookTitle(rs.getString(2));
                 book.setBookGenre(rs.getString(3));
+                book.setPublisher(rs.getString(4));
+                book.setPublishingDate(rs.getString(5));
+                book.setDescription(rs.getString(6));
+
+                //This part is for the status of the book.
+                String statusquery = "SELECT * FROM DB_A3C994_will.dbo.item WHERE b_isbn='"+ book.getBookISBN()+"';";
+                Statement st2 = conn.createStatement();
+                ResultSet statusrs = st2.executeQuery(statusquery);
+
+                if(statusrs.next()){
+                    book.setStatus(statusrs.getString(3));
+                }
+
+                //This part is for the author(s) of the book.
+                String authorquery = "SELECT * FROM DB_A3C994_will.dbo.author WHERE b_isbn='"+ book.getBookISBN()+"';";
+                Statement authorStatmt = conn.createStatement();
+                ResultSet rsauthor = authorStatmt.executeQuery(authorquery);
+                ArrayList<String> authorarray = new ArrayList<String>();
+
+                while(rsauthor.next()){
+                    authorarray.add(rsauthor.getString("author_name"));
+                }
+                String author_string = "";
+                for(int i = 0; i < authorarray.size(); i++)
+                {
+                    author_string = author_string + authorarray.get(i) + ", ";
+                }
+                author_string = author_string.substring(0, author_string.length()-2);
+                book.setBookAuthor(author_string);
+
 
                 //Print to Log
-                Log.d("query", "Title: " + rs.getString(2));
-                Log.d("query", "Genre: " + rs.getString(3));
+                Log.d("query", "Title: " + book.getBookTitle());
+                Log.d("query", "Genre: " + book.getBookGenre());
+                Log.d("query", "Status: " + book.getStatus());
+
                 books.add(book);
             }
             //Uncomment this once images can be added

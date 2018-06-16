@@ -1,9 +1,11 @@
 package com.example.jasonhuang.willslibrary;
 
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -25,7 +27,7 @@ public class itemBookActivity extends AppCompatActivity {
         String description_string = getIntent().getExtras().getString("description_string");
         String status_string = getIntent().getExtras().getString("status_string");
         String author_name_string = getIntent().getExtras().getString("author_name_string");*/
-        String status_string="In_Store";
+       // String status_string="In_Store";
         Book book = (Book) getIntent().getSerializableExtra("book");
 
 
@@ -36,15 +38,14 @@ public class itemBookActivity extends AppCompatActivity {
         TextView publisherBox = (TextView)findViewById(R.id.publisherTextViewBox);
         TextView publishing_date_Box = (TextView)findViewById(R.id.publishingDateTextView);
         TextView descriptionBox = (TextView)findViewById(R.id.descriptionTextViewBox);
-        //TextView authorTextBox = (TextView)findViewById(R.id.authorTextViewBox);
+        ImageView bookImage = (ImageView)findViewById(R.id.bookImage);
 
         titleNameBox.setText(book.getBookTitle());
         authorBox.setText(book.getBookAuthor());
         genreBox.setText(book.getBookGenre());
-        publisherBox.setText("");
-        publishing_date_Box.setText("");
-        descriptionBox.setText("");
-        //authorTextBox.setText(author_name_string);
+        publisherBox.setText(book.getPublisher());
+        publishing_date_Box.setText(book.getPublishingDate());
+        descriptionBox.setText(book.getDescription());
 
 
         TextView availableForRentText = (TextView)findViewById(R.id.availableForRentText);
@@ -57,10 +58,10 @@ public class itemBookActivity extends AppCompatActivity {
         //"In_Store" means item is available for rent.
         //"Rented" means it's rented
         //"In_Stock" means it's available but owner does not want it rented
-        if(status_string.equals("In_Store")){
+        if(book.getStatus().equals("In_Store")){
             availableForRentText.setVisibility(View.VISIBLE);
 
-        }else if (status_string.equals("Rented")){
+        }else if (book.getStatus().equals("Rented")){
             notAvailableForRentText.setVisibility(View.VISIBLE);
             rentButton.setEnabled(false);
         }else{

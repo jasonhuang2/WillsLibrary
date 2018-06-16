@@ -136,6 +136,8 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
                         ResultSet bookrs = bookstmt.executeQuery(bookquery);
 
                         if(bookrs.next()){
+                            Book book = new Book();
+
                             String title_string = bookrs.getString("title");
                             String genre_string = bookrs.getString("genre");
                             String publisher_string = bookrs.getString("publisher");
@@ -155,6 +157,17 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
                             author_string = author_string.substring(0, author_string.length()-2);
 
                             Intent itemBookPage = new Intent(this, itemBookActivity.class);
+
+                            book.setStatus(item_status);
+                            book.setBookTitle(title_string);
+                            book.setBookGenre(genre_string);
+                            book.setPublisher(publisher_string);
+                            book.setPublishingDate(publishing_date_string);
+                            book.setDescription(description_string);
+                            book.setBookAuthor(author_string);
+
+                            itemBookPage.putExtra("book", book);
+                            /*
                             itemBookPage.putExtra("title_string", title_string);
                             itemBookPage.putExtra("genre_string", genre_string);
                             itemBookPage.putExtra("publisher_string", publisher_string);
@@ -162,7 +175,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
                             itemBookPage.putExtra("description_string", description_string);
                             itemBookPage.putExtra("status_string", item_status);
                             itemBookPage.putExtra("author_name_string", author_string);
-
+                            */
 
 
 
