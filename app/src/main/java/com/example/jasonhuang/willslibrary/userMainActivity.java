@@ -45,7 +45,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     private ZXingScannerView zXingScannerView;
 
-    String first_name;
+    String first_name,username;
 
 
     @Override
@@ -69,6 +69,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
 
         //String first_name = getIntent().getExtras().getString("first_name");
         first_name = getIntent().getExtras().getString("first_name");
+        username = getIntent().getExtras().getString("username");
 
         //Printed it out.
         nameText = (TextView)findViewById(R.id.nameText);
@@ -165,8 +166,10 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
                             book.setPublishingDate(publishing_date_string);
                             book.setDescription(description_string);
                             book.setBookAuthor(author_string);
+                            book.setItemNum(Integer.valueOf(itemID));
 
                             itemBookPage.putExtra("book", book);
+                            itemBookPage.putExtra("username",username);
                             /*
                             itemBookPage.putExtra("title_string", title_string);
                             itemBookPage.putExtra("genre_string", genre_string);
@@ -374,6 +377,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
         //Intent catalogue2 = new Intent(this, catalogue2Activity.class);
         //startActivity(catalogue2);
         Intent cataloguetab = new Intent(this, catalogueTabActivity.class);
+        cataloguetab.putExtra("username",username);
         startActivity(cataloguetab);
     }
     //Going to the My Rentals page

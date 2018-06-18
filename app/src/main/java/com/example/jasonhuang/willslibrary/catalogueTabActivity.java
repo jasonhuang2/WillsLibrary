@@ -34,6 +34,7 @@ public class catalogueTabActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    private String username;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -48,7 +49,7 @@ public class catalogueTabActivity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
+        username = getIntent().getStringExtra("username");
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -100,6 +101,9 @@ public class catalogueTabActivity extends AppCompatActivity {
             switch (position){
                 case 0:
                     BookTab booktab = new BookTab();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("username",username);
+                    booktab.setArguments(bundle);
                     return booktab;
                 case 1:
                     DiskTab disktab = new DiskTab();

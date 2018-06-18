@@ -31,6 +31,7 @@ public class BookTab extends Fragment  {
     String un, pass, db, ip;
     private ListView lv;
     private BookAdapter bookAdapter;
+    private String username;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,11 +46,12 @@ public class BookTab extends Fragment  {
         un = "DB_A3C994_will_admin";    //enter username here
         pass = "willslibrary1";  //enter password here
         conn = connectionclass(un, pass, db, ip);   //I need this so I can query to the database
-
+        username = getArguments().getString("username");
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.catalogue_tab_books, container, false);
         lv = (ListView) rootView.findViewById(R.id.lvbooks);
         ArrayList<Book> books = new ArrayList<Book>();
+
 
         //Getting all the information of book database
         String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book;";
@@ -72,12 +74,13 @@ public class BookTab extends Fragment  {
                 book.setDescription(rs.getString(6));
 
                 //This part is for the status of the book.
-                String statusquery = "SELECT * FROM DB_A3C994_will.dbo.item WHERE b_isbn='"+ book.getBookISBN()+"';";
+                String statusquery = "SELECT * FROM DB_A3C994_will.dbo.item WHERE b_isbn='"+ book.getBookISBN()+"' ORDER BY status asc;";
                 Statement st2 = conn.createStatement();
                 ResultSet statusrs = st2.executeQuery(statusquery);
 
                 if(statusrs.next()){
                     book.setStatus(statusrs.getString(3));
+                    book.setItemNum(statusrs.getInt(1));
                 }
 
                 //This part is for the author(s) of the book.
@@ -96,7 +99,6 @@ public class BookTab extends Fragment  {
                 }
                 author_string = author_string.substring(0, author_string.length()-2);
                 book.setBookAuthor(author_string);
-
 
                 //Print to Log
                 Log.d("query", "Title: " + book.getBookTitle());
@@ -139,6 +141,7 @@ public class BookTab extends Fragment  {
                 //I no longer know what book i clicked on?
                 Intent intent = new Intent(getActivity(),itemBookActivity.class);
                 intent.putExtra("book",(Serializable) bookAdapter.getItem(position));
+                intent.putExtra("username",username);
                // Log.i("message",bookAdapter.getItem(position));
                 getActivity().startActivity(intent);
             }

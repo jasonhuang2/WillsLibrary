@@ -159,5 +159,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/descriptionTextViewBox"
         android:layout_marginBottom="18dp"
+        android:onClick="onRentalClick"
         android:text="RENT ITEM" />
 </RelativeLayout>

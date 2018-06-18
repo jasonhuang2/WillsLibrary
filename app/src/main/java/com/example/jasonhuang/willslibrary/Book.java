@@ -12,6 +12,7 @@ public class Book implements Serializable {
     private String publishingdate;
     private String description;
     private String status;
+    private int itemNum;
 
 
     public String getBookISBN(){ return bookISBN; }
@@ -23,6 +24,7 @@ public class Book implements Serializable {
     public String getPublishingDate(){ return publishingdate; }
     public String getDescription(){ return description; }
     public String getStatus() {return status; }
+    public int getItemNum() {return itemNum; }
 
 
     public void setBookISBN(String bookISBN){ this.bookISBN = bookISBN; }
@@ -34,5 +36,6 @@ public class Book implements Serializable {
     public void setPublishingDate(String publishingDate) {this.publishingdate = publishingDate; }
     public void setDescription(String description) {this.description = description; }
     public void setStatus(String status) {this.status = status; }
+    public void setItemNum(int itemNum) {this.itemNum = itemNum;}
 
 }
