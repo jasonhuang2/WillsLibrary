@@ -143,10 +143,13 @@ public class BookTab extends Fragment  {
                 intent.putExtra("book",(Serializable) bookAdapter.getItem(position));
                 intent.putExtra("username",username);
                // Log.i("message",bookAdapter.getItem(position));
-                getActivity().startActivity(intent);
+                getActivity().startActivityForResult(intent,1033);
             }
         });
     }
+
+
+
 
 
     //connection class

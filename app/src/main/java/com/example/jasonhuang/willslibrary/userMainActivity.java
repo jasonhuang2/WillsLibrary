@@ -383,6 +383,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
     //Going to the My Rentals page
     public void my_rental_Click(View v){
         Intent myrentalI = new Intent(this, myrentalMainActivity.class);
+        myrentalI.putExtra("username",username);
         startActivity(myrentalI);
     }
     //Going to the My Fines page

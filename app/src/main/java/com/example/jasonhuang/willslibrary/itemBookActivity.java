@@ -1,6 +1,8 @@
 package com.example.jasonhuang.willslibrary;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.media.Image;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -142,6 +144,24 @@ public class itemBookActivity extends AppCompatActivity {
             stmt.execute(query);
             //now update the location of the book to the address of the user.
             //This is going unimplemented.
+            //UPDATE LOCATION
+            //SET [LOCATION].address = [USERS].address
+            //FROM LOCATION
+            //INNER JOIN ITEM ON LOCATION.i_item_id=ITEM.item_id
+            //INNER JOIN RENTAL ON RENTAL.i_item_id=ITEM.item_id
+            //INNER JOIN CONSUME ON RENTAL.rental_id=CONSUME.r_rental_id
+            //INNER JOIN USERS ON [USERS].username=[CONSUME].u_username
+            //WHERE [USERS].username='user';
+            //That is an stupid in my opinion. But I do not want to deal with asking for responce
+            query="UPDATE LOCATION " +
+                    "SET [LOCATION].address = [USERS].address " +
+                    "FROM LOCATION " +
+                    "INNER JOIN ITEM ON LOCATION.i_item_id=ITEM.item_id " +
+                    "INNER JOIN RENTAL ON RENTAL.i_item_id=ITEM.item_id " +
+                    "INNER JOIN CONSUME ON RENTAL.rental_id=CONSUME.r_rental_id " +
+                    "INNER JOIN USERS ON [USERS].username=[CONSUME].u_username " +
+                    "WHERE [USERS].username='"+username+"';";
+            stmt.execute(query);
 
 
 
@@ -153,6 +173,8 @@ public class itemBookActivity extends AppCompatActivity {
         }
 
         //SELECT username FROM DB_A3C994_will.dbo.users WHERE username
+        Intent intent = new Intent();
+        setResult(Activity.RESULT_OK,intent);
         finish();
     }
     //connection class
