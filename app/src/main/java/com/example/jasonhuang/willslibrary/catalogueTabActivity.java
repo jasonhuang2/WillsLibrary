@@ -116,9 +116,15 @@ public class catalogueTabActivity extends AppCompatActivity {
                     return booktab;
                 case 1:
                     DiskTab disktab = new DiskTab();
+                    Bundle diskbundle = new Bundle();
+                    diskbundle.putString("username", username);
+                    disktab.setArguments(diskbundle);
                     return disktab;
                 case 2:
                     OtherTab othertab = new OtherTab();
+                    Bundle otherbundle = new Bundle();
+                    otherbundle.putString("username", username);
+                    othertab.setArguments(otherbundle);
                     return othertab;
                 default:
                     return null;

@@ -167,6 +167,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
                             book.setDescription(description_string);
                             book.setBookAuthor(author_string);
                             book.setItemNum(Integer.valueOf(itemID));
+                            book.setBookCover(item_image);
 
                             itemBookPage.putExtra("book", book);
                             itemBookPage.putExtra("username",username);
@@ -202,20 +203,34 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
                         ResultSet diskrs = diskstmt.executeQuery(diskquery);
 
                         if(diskrs.next()){
-                            String title_string = diskrs.getString("title");
-                            String datereleased_string = diskrs.getString("date_released");
-                            String genre_string = diskrs.getString("genre");
-                            String disktype_string = diskrs.getString("disk_type");
-                            String description_string = diskrs.getString("description");
+                                Disk disk = new Disk();
+                                String title_string = diskrs.getString("title");
+                                String datereleased_string = diskrs.getString("date_released");
+                                String genre_string = diskrs.getString("genre");
+                                String disktype_string = diskrs.getString("disk_type");
+                                String description_string = diskrs.getString("description");
 
-                            Intent itemDiskPage = new Intent(this, itemDiskActivity.class);
-                            itemDiskPage.putExtra("title_string", title_string);
-                            itemDiskPage.putExtra("genre_string", genre_string);
-                            itemDiskPage.putExtra("datereleased_string", datereleased_string);
-                            itemDiskPage.putExtra("disktype_string", disktype_string);
-                            itemDiskPage.putExtra("description_string", description_string);
+                                Intent itemDiskPage = new Intent(this, itemDiskActivity.class);
 
-                            startActivity(itemDiskPage);
+                                disk.setStatus(item_status);
+                                disk.setDiskTitle(title_string);
+                                disk.setDiskdatereleased(datereleased_string);
+                                disk.setDiskGenre(genre_string);
+                                disk.setDiskType(disktype_string);
+                                disk.setDiskDescription(description_string);
+                                disk.setItemNum(Integer.valueOf(itemID));
+                                disk.setDiskCover(item_image);
+
+                                itemDiskPage.putExtra("disk", disk);
+                                itemDiskPage.putExtra("username", username);
+                                /*
+                                itemDiskPage.putExtra("title_string", title_string);
+                                itemDiskPage.putExtra("genre_string", genre_string);
+                                itemDiskPage.putExtra("datereleased_string", datereleased_string);
+                                itemDiskPage.putExtra("disktype_string", disktype_string);
+                                itemDiskPage.putExtra("description_string", description_string);
+                                */
+                                startActivity(itemDiskPage);
                         }
                         else{
                             Log.d("query", "Disk does not exist in the database");
@@ -234,13 +249,21 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
                         ResultSet otherrs = otherstmt.executeQuery(otherquery);
 
                         if(otherrs.next()){
+                            Other other = new Other();
                             String type_string = otherrs.getString("type");
+                            int other_id = otherrs.getInt("other_id");
                             String description_string = otherrs.getString("description");
 
                             Intent itemOtherPage = new Intent(this, itemOtherActivity.class);
-                            itemOtherPage.putExtra("type_string", type_string);
-                            itemOtherPage.putExtra("description_string", description_string);
+                            other.setOtherID(other_id);
+                            other.setStatus(item_status);
+                            other.setOtherType(type_string);
+                            other.setOtherDescription(description_string);
+                            other.setOtherCover(item_image);
+                            other.setItemNum(Integer.valueOf(itemID));
 
+                            itemOtherPage.putExtra("other", other);
+                            itemOtherPage.putExtra("username", username);
                             startActivity(itemOtherPage);
                         }
                         else{
