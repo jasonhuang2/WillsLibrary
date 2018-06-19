@@ -31,6 +31,7 @@ public class BookTab extends Fragment  {
     String un, pass, db, ip;
     private ListView lv;
     private BookAdapter bookAdapter;
+    private String username;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,15 +46,17 @@ public class BookTab extends Fragment  {
         un = "DB_A3C994_will_admin";    //enter username here
         pass = "willslibrary1";  //enter password here
         conn = connectionclass(un, pass, db, ip);   //I need this so I can query to the database
-
+        username = getArguments().getString("username");
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.catalogue_tab_books, container, false);
         lv = (ListView) rootView.findViewById(R.id.lvbooks);
         ArrayList<Book> books = new ArrayList<Book>();
 
+
         //Getting all the information of book database
         String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book;";
         String imagequery = "SELECT image FROM DB_A3C994_will.dbo.item WHERE b_isbn IS NOT NULL;";
+
 
         try {
             Statement st = conn.createStatement();
@@ -63,12 +66,45 @@ public class BookTab extends Fragment  {
             int numbooks = rs.getFetchSize();
             while (rs.next()) {
                 Book book = new Book();
+                book.setBookISBN(rs.getString(1));
                 book.setBookTitle(rs.getString(2));
                 book.setBookGenre(rs.getString(3));
+                book.setPublisher(rs.getString(4));
+                book.setPublishingDate(rs.getString(5));
+                book.setDescription(rs.getString(6));
+
+                //This part is for the status of the book.
+                String statusquery = "SELECT * FROM DB_A3C994_will.dbo.item WHERE b_isbn='"+ book.getBookISBN()+"' ORDER BY status asc;";
+                Statement st2 = conn.createStatement();
+                ResultSet statusrs = st2.executeQuery(statusquery);
+
+                if(statusrs.next()){
+                    book.setStatus(statusrs.getString(3));
+                    book.setItemNum(statusrs.getInt(1));
+                }
+
+                //This part is for the author(s) of the book.
+                String authorquery = "SELECT * FROM DB_A3C994_will.dbo.author WHERE b_isbn='"+ book.getBookISBN()+"';";
+                Statement authorStatmt = conn.createStatement();
+                ResultSet rsauthor = authorStatmt.executeQuery(authorquery);
+                ArrayList<String> authorarray = new ArrayList<String>();
+
+                while(rsauthor.next()){
+                    authorarray.add(rsauthor.getString("author_name"));
+                }
+                String author_string = "";
+                for(int i = 0; i < authorarray.size(); i++)
+                {
+                    author_string = author_string + authorarray.get(i) + ", ";
+                }
+                author_string = author_string.substring(0, author_string.length()-2);
+                book.setBookAuthor(author_string);
 
                 //Print to Log
-                Log.d("query", "Title: " + rs.getString(2));
-                Log.d("query", "Genre: " + rs.getString(3));
+                Log.d("query", "Title: " + book.getBookTitle());
+                Log.d("query", "Genre: " + book.getBookGenre());
+                Log.d("query", "Status: " + book.getStatus());
+
                 books.add(book);
             }
             //Uncomment this once images can be added
@@ -105,11 +141,15 @@ public class BookTab extends Fragment  {
                 //I no longer know what book i clicked on?
                 Intent intent = new Intent(getActivity(),itemBookActivity.class);
                 intent.putExtra("book",(Serializable) bookAdapter.getItem(position));
+                intent.putExtra("username",username);
                // Log.i("message",bookAdapter.getItem(position));
-                getActivity().startActivity(intent);
+                getActivity().startActivityForResult(intent,1033);
             }
         });
     }
+
+
+
 
 
     //connection class

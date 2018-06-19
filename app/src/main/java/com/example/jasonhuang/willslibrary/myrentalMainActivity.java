@@ -5,9 +5,12 @@ import android.os.Bundle;
 
 public class myrentalMainActivity extends AppCompatActivity {
 
+    private String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myrental_activity);
+        username=getIntent().getStringExtra("username");
+
     }
 }

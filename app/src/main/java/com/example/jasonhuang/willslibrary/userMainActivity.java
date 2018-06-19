@@ -45,7 +45,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     private ZXingScannerView zXingScannerView;
 
-    String first_name;
+    String first_name,username;
 
 
     @Override
@@ -69,6 +69,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
 
         //String first_name = getIntent().getExtras().getString("first_name");
         first_name = getIntent().getExtras().getString("first_name");
+        username = getIntent().getExtras().getString("username");
 
         //Printed it out.
         nameText = (TextView)findViewById(R.id.nameText);
@@ -136,6 +137,8 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
                         ResultSet bookrs = bookstmt.executeQuery(bookquery);
 
                         if(bookrs.next()){
+                            Book book = new Book();
+
                             String title_string = bookrs.getString("title");
                             String genre_string = bookrs.getString("genre");
                             String publisher_string = bookrs.getString("publisher");
@@ -155,6 +158,19 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
                             author_string = author_string.substring(0, author_string.length()-2);
 
                             Intent itemBookPage = new Intent(this, itemBookActivity.class);
+
+                            book.setStatus(item_status);
+                            book.setBookTitle(title_string);
+                            book.setBookGenre(genre_string);
+                            book.setPublisher(publisher_string);
+                            book.setPublishingDate(publishing_date_string);
+                            book.setDescription(description_string);
+                            book.setBookAuthor(author_string);
+                            book.setItemNum(Integer.valueOf(itemID));
+
+                            itemBookPage.putExtra("book", book);
+                            itemBookPage.putExtra("username",username);
+                            /*
                             itemBookPage.putExtra("title_string", title_string);
                             itemBookPage.putExtra("genre_string", genre_string);
                             itemBookPage.putExtra("publisher_string", publisher_string);
@@ -162,7 +178,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
                             itemBookPage.putExtra("description_string", description_string);
                             itemBookPage.putExtra("status_string", item_status);
                             itemBookPage.putExtra("author_name_string", author_string);
-
+                            */
 
 
 
@@ -361,11 +377,13 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
         //Intent catalogue2 = new Intent(this, catalogue2Activity.class);
         //startActivity(catalogue2);
         Intent cataloguetab = new Intent(this, catalogueTabActivity.class);
+        cataloguetab.putExtra("username",username);
         startActivity(cataloguetab);
     }
     //Going to the My Rentals page
     public void my_rental_Click(View v){
         Intent myrentalI = new Intent(this, myrentalMainActivity.class);
+        myrentalI.putExtra("username",username);
         startActivity(myrentalI);
     }
     //Going to the My Fines page
