@@ -103,7 +103,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
         EditText itemIDInputBox = (EditText) findViewById(R.id.itemIDInputBox);
 
         String itemID = itemIDInputBox.getText().toString();
-        Log.d("query", "ITEMID: " + itemID);
+        //Log.d("query", "ITEMID: " + itemID);
         //First Query to obtain the item type
         //Creating the query to obtain the type
         String itemquery = "SELECT * FROM DB_A3C994_will.dbo.item WHERE item_id='" + itemID + "';";
@@ -112,14 +112,14 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
         try{
             Statement itemstmt = conn.createStatement();
             ResultSet itemrs = itemstmt.executeQuery(itemquery);
-            Log.d("query", "Sending Query");
+            //Log.d("query", "Sending Query");
             //If the query returns a response
             if(itemrs.next()){
                 //Obtain the type from the response
                 String item_type = itemrs.getString("type");
                 String item_status = itemrs.getString("status");
                 String item_image = itemrs.getString("image");
-                Log.d("query", "Received Response: " + item_type);
+                //Log.d("query", "Received Response: " + item_type);
                 //Do further querying to obtain Book information
                 if(item_type.equals("Book")){
                     String isbn = itemrs.getString("b_isbn");
