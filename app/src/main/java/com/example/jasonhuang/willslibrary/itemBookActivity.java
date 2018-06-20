@@ -58,7 +58,7 @@ public class itemBookActivity extends AppCompatActivity {
 
 
 
-            TextView titleNameBox = (TextView)findViewById(R.id.titleTextViewBox);
+        TextView titleNameBox = (TextView)findViewById(R.id.titleTextViewBox);
         TextView authorBox = (TextView) findViewById(R.id.authorTextViewBox);
         TextView genreBox = (TextView)findViewById(R.id.genreTextViewBox);
         TextView publisherBox = (TextView)findViewById(R.id.publisherTextViewBox);

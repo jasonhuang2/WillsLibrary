@@ -347,6 +347,31 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
 
     }
 
+    //Going to the Catalogue page
+    public void catalogueClick(View v){
+        //Intent catalogueI = new Intent(this, catalogueMainActivity.class);
+        //startActivity(catalogueI);
+        //Intent catalogue2 = new Intent(this, catalogue2Activity.class);
+        //startActivity(catalogue2);
+        Intent cataloguetab = new Intent(this, catalogueTabActivity.class);
+        cataloguetab.putExtra("username",username);
+        startActivity(cataloguetab);
+    }
+    //Going to the My Rentals page
+    public void my_rental_Click(View v){
+        Intent myrentalI = new Intent(this, myrentalMainActivity.class);
+        myrentalI.putExtra("username",username);
+        startActivity(myrentalI);
+    }
+    //Going to the My Fines page
+    public void my_fines_Click(View v){
+        conn = connectionclass(un, pass, db, ip);   //I need this so I can query to the database
+        Intent myfinesI = new Intent(this, myfinesMainActivity.class);
+
+        myfinesI.putExtra("username", username);
+        startActivity(myfinesI);
+
+    }
 
 
 
@@ -370,25 +395,5 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
 
         return connection;
     }
-    //Going to the Catalogue page
-    public void catalogueClick(View v){
-        //Intent catalogueI = new Intent(this, catalogueMainActivity.class);
-        //startActivity(catalogueI);
-        //Intent catalogue2 = new Intent(this, catalogue2Activity.class);
-        //startActivity(catalogue2);
-        Intent cataloguetab = new Intent(this, catalogueTabActivity.class);
-        cataloguetab.putExtra("username",username);
-        startActivity(cataloguetab);
-    }
-    //Going to the My Rentals page
-    public void my_rental_Click(View v){
-        Intent myrentalI = new Intent(this, myrentalMainActivity.class);
-        myrentalI.putExtra("username",username);
-        startActivity(myrentalI);
-    }
-    //Going to the My Fines page
-    public void my_fines_Click(View v){
-        Intent myfinesI = new Intent(this, myfinesMainActivity.class);
-        startActivity(myfinesI);
-    }
+
 }
