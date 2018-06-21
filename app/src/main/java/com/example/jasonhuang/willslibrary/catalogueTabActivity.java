@@ -92,7 +92,11 @@ public class catalogueTabActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        finish();
+        //This makes it so that only the rental button will bring us back to the main local.
+        if(resultCode!=Activity.RESULT_CANCELED) {
+            finish();
+        }
+
     }
 
     /**
