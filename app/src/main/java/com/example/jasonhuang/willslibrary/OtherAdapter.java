@@ -47,6 +47,14 @@ public class OtherAdapter extends ArrayAdapter<Other>  {
         viewHolder.tvTitle.setText(other.getOtherType());
         viewHolder.tvID.setText(Integer.toString(other.getOtherID()));
         //Do the same for image
+        int itemNum = other.getItemNum();
+        switch(itemNum){
+            case 7:
+                viewHolder.ivCover.setImageResource(R.drawable.blenderbottle);
+                break;
+            default:
+                viewHolder.ivCover.setImageResource(R.drawable.otherimage);
+        }
         return convertView;
     }
 
