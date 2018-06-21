@@ -33,12 +33,11 @@ public class adminActivity extends AppCompatActivity {
 
     }
 
-    public void addItemOnClick(View v) {
+
+    public void addItemListener(View v){
         Intent addItemActivity = new Intent(this, adminAddItemActivity.class);
         startActivity(addItemActivity);
-
     }
-
     public void returnItemOnClick(View v) {
         Intent intent = new Intent(this,returnItem.class);
         startActivity(intent);

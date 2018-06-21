@@ -134,7 +134,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="54dp"
-        android:onClick="addButtonListener"
-        android:text="Button" />
+        android:onClick="addButtonBookListener"
+        android:text="Add Book"
+        android:visibility="visible" />
 
 </RelativeLayout>

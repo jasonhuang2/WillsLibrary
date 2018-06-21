@@ -1,17 +1,25 @@
 package com.example.jasonhuang.willslibrary;
 
+import android.annotation.SuppressLint;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-public class adminAddItemActivity extends AppCompatActivity {
+import java.sql.Connection;
+import java.sql.DriverManager;
 
+public class adminAddItemActivity extends AppCompatActivity {
+    Connection conn;
+    String un, pass, db, ip;
 
 
 
@@ -35,6 +43,7 @@ public class adminAddItemActivity extends AppCompatActivity {
         final EditText publisherDateInput = (EditText)findViewById(R.id.publishingDateInput);
         final TextView descriptionText = (TextView)findViewById(R.id.descriptionText);
         final EditText descriptionInput = (EditText)findViewById(R.id.descriptionInput);
+        final Button addBookButton = (Button)findViewById(R.id.addItemButton);
 
 
 
@@ -55,6 +64,9 @@ public class adminAddItemActivity extends AppCompatActivity {
                     publisherDateInput.setVisibility(View.VISIBLE);
                     descriptionText.setVisibility(View.VISIBLE);
                     descriptionInput.setVisibility(View.VISIBLE);
+                    addBookButton.setVisibility(View.VISIBLE);
+
+
 
 
                 }else if(itemSelected.equals("Disk")){
@@ -69,6 +81,8 @@ public class adminAddItemActivity extends AppCompatActivity {
                     publisherDateInput.setVisibility(View.INVISIBLE);
                     descriptionText.setVisibility(View.INVISIBLE);
                     descriptionInput.setVisibility(View.INVISIBLE);
+                    addBookButton.setVisibility(View.INVISIBLE);
+
 
 
 
@@ -83,26 +97,60 @@ public class adminAddItemActivity extends AppCompatActivity {
                     publisherDateText.setVisibility(View.INVISIBLE);
                     publisherDateInput.setVisibility(View.INVISIBLE);
                     descriptionText.setVisibility(View.INVISIBLE);
-                    descriptionInput.setVisibility(View.INVISIBLE);                }
+                    descriptionInput.setVisibility(View.INVISIBLE);
+                    addBookButton.setVisibility(View.INVISIBLE);
 
-
+                }
             }
-
             //Ignore this for now
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-
             }
-
         });
-    }
-
-    public void addButtonListener(View v){
-        EditText bookNameInput = (EditText)findViewById(R.id.bookNameInput);
-        TextView bookNameText = (TextView)findViewById(R.id.bookNameText);
-
-
-        bookNameText.setText(bookNameInput.getText().toString());
 
     }
+
+    /*
+     * this is responsible for adding a book
+     */
+    public void addButtonBookListener(View v){
+         EditText bookNameInput = (EditText)findViewById(R.id.bookNameInput);
+         EditText authorNameInput = (EditText) findViewById(R.id.authorNameInput);
+         EditText publisherNameInput = (EditText)findViewById(R.id.publisherNameInput);
+         EditText publisherDateInput = (EditText)findViewById(R.id.publishingDateInput);
+         EditText descriptionInput = (EditText)findViewById(R.id.descriptionInput);
+
+        //String addBookQuery = "Insert "
+
+    }
+
+
+
+    //connection class
+    @SuppressLint("NewApi")
+    public Connection connectionclass (String user, String pass, String db, String server){
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        Connection connection = null;
+        String connectionURL = null;
+
+        try{
+            Class.forName("net.sourceforge.jtds.jdbc.Driver");
+            connectionURL = "jdbc:jtds:sqlserver://" + server + ";" + "databseName=" + db + ";user=" + user + ";password=" + pass + ";";
+            connection = DriverManager.getConnection(connectionURL);
+
+        }catch(Exception e){
+            Log.e("Error: ", e.getMessage());
+        }
+
+        return connection;
+    }
+
+
+
+
+
+
+
+
 }

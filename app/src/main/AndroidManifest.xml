@@ -32,6 +32,7 @@
         <activity android:name=".itemDiskActivity" />
         <activity android:name=".itemOtherActivity" />
         <activity android:name=".userCreationActivity" />
+        <activity android:name=".adminAddItemActivity" />
         <activity
             android:name=".catalogueTabActivity"
             android:label="@string/title_activity_catalogue_tab"
