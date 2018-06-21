@@ -34,6 +34,8 @@ public class adminActivity extends AppCompatActivity {
     }
 
     public void addItemOnClick(View v) {
+        Intent addItemActivity = new Intent(this, adminAddItemActivity.class);
+        startActivity(addItemActivity);
 
     }
 

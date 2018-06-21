@@ -35,7 +35,8 @@
             android:name=".catalogueTabActivity"
             android:label="@string/title_activity_catalogue_tab"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".adminActivity"></activity>
+        <activity android:name=".adminActivity" />
+        <activity android:name=".adminAddItemActivity"></activity>
     </application>
 
 </manifest>
