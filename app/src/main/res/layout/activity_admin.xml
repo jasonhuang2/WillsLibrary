@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/admin_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_alignTop="@+id/admin_name"
+        android:layout_toStartOf="@+id/admin_name"
+        android:text="Welcome"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+    <TextView
+        android:id="@+id/admin_name"
+        android:layout_width="74dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="104dp"
+        android:layout_marginTop="21dp"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+    <Button
+        android:id="@+id/activeUserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="116dp"
+        android:onClick="activeUsersOnClick"
+        android:text="Active Users" />
+
+    <Button
+        android:id="@+id/addItemButton"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/activeUserButton"
+        android:layout_marginEnd="48dp"
+        android:onClick="addItemOnClick"
+        android:text="Add Item" />
+
+    <Button
+        android:id="@+id/activeRentalsButton"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/activeUserButton"
+        android:layout_marginTop="202dp"
+        android:onClick="activeRentalsOnClick"
+        android:text="Active Rentals" />
+
+    <Button
+        android:id="@+id/returnItemButton"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/activeRentalsButton"
+        android:layout_alignStart="@+id/addItemButton"
+        android:onClick="returnItemOnClick"
+        android:text="Return Item" />
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="54dp"
+        android:onClick="logoutOnClick"
+        android:text="Logout" />
+</RelativeLayout>

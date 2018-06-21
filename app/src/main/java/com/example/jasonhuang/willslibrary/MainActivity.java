@@ -105,10 +105,10 @@ public class MainActivity extends AppCompatActivity{
                     if (passwordInputBox.getText().toString().equals(result)) {
                         //We have stubbed this into, the userland local - untill i can fix it.
                         resultText.setText("Logged in");    //Set the text to Logged in to let the user know
-                        Intent intent = new Intent(this, userMainActivity.class);   //Since now the user is logged in, switch over to the user main menu layout
+                        Intent intent = new Intent(this, adminActivity.class);   //Since now the user is logged in, switch over to the user main menu layout
                         intent.putExtra("first_name", first_name); //As explained in userMainActivity, first_name will be stored under the key word "first_name"
-                        intent.putExtra("username",usernameInputBox.getText().toString());
-                        startActivity(intent);
+                        //intent.putExtra("username",usernameInputBox.getText().toString());
+                        startActivityForResult(intent,USER_LOGOUT);
                     }else {
                         resultText.setText("Incorrect username or password");
                     }

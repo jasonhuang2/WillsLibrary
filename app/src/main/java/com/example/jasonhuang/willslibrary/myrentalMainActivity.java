@@ -50,8 +50,8 @@ public class myrentalMainActivity extends AppCompatActivity {
         un = "DB_A3C994_will_admin";    //enter username here
         pass = "willslibrary1";  //enter password here
         conn = connectionclass(un, pass, db, ip);   //I need this so I can query to the database
-
-        String rentalquery = "SELECT i_item_id, due_date, cost_per_day_overdue, type FROM DB_A3C994_will.dbo.rental, DB_A3C994_will.dbo.consume, DB_A3C994_will.dbo.item WHERE item_id = i_item_id AND u_username = '" + username + "';";
+        //Added check to see if this was returned and added the rental_id=r_rental_id check.
+        String rentalquery = "SELECT i_item_id, due_date, cost_per_day_overdue, type FROM DB_A3C994_will.dbo.rental, DB_A3C994_will.dbo.consume, DB_A3C994_will.dbo.item WHERE date_returned IS NULL AND item_id = i_item_id AND r_rental_id=rental_id AND u_username = '" + username + "';";
         try{
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(rentalquery);
