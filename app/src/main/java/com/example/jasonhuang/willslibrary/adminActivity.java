@@ -38,7 +38,8 @@ public class adminActivity extends AppCompatActivity {
     }
 
     public void returnItemOnClick(View v) {
-        
+        Intent intent = new Intent(this,returnItem.class);
+        startActivity(intent);
 
     }
 }
