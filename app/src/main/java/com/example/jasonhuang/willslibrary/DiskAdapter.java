@@ -46,6 +46,18 @@ public class DiskAdapter extends ArrayAdapter<Disk>  {
         }
         viewHolder.tvTitle.setText(disk.getDiskTitle());
         viewHolder.tvType.setText(disk.getDiskType());
+        int itemNum = disk.getItemNum();
+        switch(itemNum){
+            case 3:
+                viewHolder.ivCover.setImageResource(R.drawable.blackops3);
+                break;
+            case 4:
+                viewHolder.ivCover.setImageResource(R.drawable.theincredibles);
+                break;
+            default:
+                viewHolder.ivCover.setImageResource(R.drawable.diskimage);
+                break;
+        }
         //Do the same for image
         return convertView;
     }

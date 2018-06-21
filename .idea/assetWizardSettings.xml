@@ -19,8 +19,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Shaheed\Documents\CPSC471\disk.png" />
-                                      <entry key="outputName" value="diskimage" />
+                                      <entry key="imageAsset" value="C:\Users\Shaheed\Documents\CPSC471\object.png" />
+                                      <entry key="outputName" value="otherimage" />
                                     </map>
                                   </option>
                                 </PersistentState>

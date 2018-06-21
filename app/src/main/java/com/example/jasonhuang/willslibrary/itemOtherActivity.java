@@ -55,10 +55,20 @@ public class itemOtherActivity extends AppCompatActivity {
         TextView otherIDBox = (TextView)findViewById(R.id.typeTextViewBox);
         TextView descriptionBox = (TextView)findViewById(R.id.descriptionTextViewBox);
         ImageView otherImage = (ImageView) findViewById(R.id.bookImage);
+
         titleNameBox.setText(toDisplay.getOtherType());
         otherIDBox.setText(Integer.toString(toDisplay.getOtherID()));
         descriptionBox.setText(toDisplay.getOtherDescription());
         item_id = toDisplay.getItemNum();
+
+        switch(item_id){
+            case 7:
+                otherImage.setImageResource(R.drawable.blenderbottle);
+                break;
+            default:
+                otherImage.setImageResource(R.drawable.otherimage);
+        }
+
         TextView availableForRentText = (TextView) findViewById(R.id.availableForRentText);
         TextView notAvailableForRentText = (TextView)findViewById(R.id.notAvailableForRent);
         TextView inStockText = (TextView) findViewById(R.id.inStockText);

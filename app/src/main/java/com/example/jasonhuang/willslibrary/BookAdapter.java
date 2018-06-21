@@ -46,6 +46,30 @@ public class BookAdapter extends ArrayAdapter<Book>  {
         viewHolder.tvTitle.setText(book.getBookTitle());
         viewHolder.tvAuthor.setText(book.getBookAuthor());
         //Do the same for image
+        int itemNum = book.getItemNum();
+        switch(itemNum) {
+            case 1:
+                viewHolder.ivCover.setImageResource(R.drawable.deathofasalesman);
+                break;
+            case 2:
+                viewHolder.ivCover.setImageResource(R.drawable.merchantofvenice);
+                break;
+            case 5:
+                viewHolder.ivCover.setImageResource(R.drawable.readyplayerone);
+                break;
+            case 6:
+                viewHolder.ivCover.setImageResource(R.drawable.hpandps);
+                break;
+            case 8:
+                viewHolder.ivCover.setImageResource(R.drawable.merchantofvenice);
+                break;
+            case 9:
+                viewHolder.ivCover.setImageResource(R.drawable.merchantofvenice);
+                break;
+            default:
+                viewHolder.ivCover.setImageResource(R.drawable.ic_action_name);
+                break;
+        }
         return convertView;
     }
 

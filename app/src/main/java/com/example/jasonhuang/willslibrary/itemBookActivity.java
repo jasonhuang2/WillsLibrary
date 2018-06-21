@@ -72,8 +72,31 @@ public class itemBookActivity extends AppCompatActivity {
         publisherBox.setText(toDisplay.getPublisher());
         publishing_date_Box.setText(toDisplay.getPublishingDate());
         descriptionBox.setText(toDisplay.getDescription());
-        item_id=toDisplay.getItemNum();
 
+        item_id=toDisplay.getItemNum();
+        switch(item_id) {
+            case 1:
+                bookImage.setImageResource(R.drawable.deathofasalesman);
+                break;
+            case 2:
+                bookImage.setImageResource(R.drawable.merchantofvenice);
+                break;
+            case 5:
+                bookImage.setImageResource(R.drawable.readyplayerone);
+                break;
+            case 6:
+                bookImage.setImageResource(R.drawable.hpandps);
+                break;
+            case 8:
+                bookImage.setImageResource(R.drawable.merchantofvenice);
+                break;
+            case 9:
+                bookImage.setImageResource(R.drawable.merchantofvenice);
+                break;
+            default:
+                bookImage.setImageResource(R.drawable.ic_action_name);
+                break;
+        }
 
         TextView availableForRentText = (TextView)findViewById(R.id.availableForRentText);
         //Where is this comming from... as it is known by the item entity, an not the book entity.

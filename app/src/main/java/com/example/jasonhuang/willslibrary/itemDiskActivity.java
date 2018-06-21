@@ -64,6 +64,17 @@ public class itemDiskActivity extends AppCompatActivity {
         datereleasedBox.setText(toDisplay.getDiskDateReleased());
         descriptionBox.setText(toDisplay.getDiskDescription());
         item_id = toDisplay.getItemNum();
+        switch(item_id){
+            case 3:
+                diskImage.setImageResource(R.drawable.blackops3);
+                break;
+            case 4:
+                diskImage.setImageResource(R.drawable.theincredibles);
+                break;
+            default:
+                diskImage.setImageResource(R.drawable.diskimage);
+                break;
+        }
 
         TextView availableForRentText = (TextView) findViewById(R.id.availableForRentText);
         TextView notAvailableForRentText = (TextView)findViewById(R.id.notAvailableForRent);
