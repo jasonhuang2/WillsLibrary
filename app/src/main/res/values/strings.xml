@@ -7,4 +7,10 @@
         <item>Admin</item>
     </string-array>
     <string name="title_activity_user_main_activity">user_main_activity</string>
+    <string name="title_activity_catalogue_tab">catalogueTabActivity</string>
+    <string name="tab_text_1">Books</string>
+    <string name="tab_text_2">Disks</string>
+    <string name="tab_text_3">Other Items</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

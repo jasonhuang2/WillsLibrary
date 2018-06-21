@@ -3,6 +3,10 @@
     package="com.example.jasonhuang.willslibrary">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
 
     <application
         android:allowBackup="true"
@@ -26,7 +30,11 @@
         <activity android:name=".itemBookActivity" />
         <activity android:name=".itemDiskActivity" />
         <activity android:name=".itemOtherActivity" />
-        <activity android:name=".userCreationActivity"></activity>
+        <activity android:name=".userCreationActivity" />
+        <activity
+            android:name=".catalogueTabActivity"
+            android:label="@string/title_activity_catalogue_tab"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
@@ -90,4 +91,24 @@
         android:layout_centerHorizontal="true"
         android:onClick="itemLookUpListener"
         android:text="Search" />
+
+    <Button
+        android:id="@+id/barcodeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/itemIDInputBox"
+        android:onClick="barcodeScannerListener"
+        android:text="BARCODE" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/catalogue_button"
+        android:layout_marginBottom="17dp"
+        android:onClick="logoutListener"
+        android:text="Logout" />
+
 </RelativeLayout>

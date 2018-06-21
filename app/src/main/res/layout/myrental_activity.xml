@@ -1,5 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <ListView
+        android:id="@+id/rentallv"
+        android:layout_width="match_parent"
+        android:layout_height="475dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="88dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rentallv"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="-88dp"
+        android:text="Item ID"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rentallv"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="-88dp"
+        android:layout_marginStart="90dp"
+        android:text="Item Title"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rentallv"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="-88dp"
+        android:layout_marginEnd="128dp"
+        android:text="Due Date"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rentallv"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="-88dp"
+        android:text="Cost/Day Overdue"
+        android:textStyle="bold" />
 </RelativeLayout>

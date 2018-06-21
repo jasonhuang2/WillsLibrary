@@ -1,22 +1,40 @@
 package com.example.jasonhuang.willslibrary;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.media.Image;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+
+import com.google.zxing.Result;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
-public class userMainActivity extends AppCompatActivity {
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
+
+
+public class userMainActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
     Connection conn;
     String un, pass, db, ip;
@@ -24,6 +42,11 @@ public class userMainActivity extends AppCompatActivity {
     // But this doesn't work if you try doing a query inside of  the onCreate function.
     //Solution: I want to do a query in the mainActivity.java which finds out the name depending on the inputted username
     // I then passed it on into this java and displayed it.
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    private ZXingScannerView zXingScannerView;
+
+    String first_name,username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +64,37 @@ public class userMainActivity extends AppCompatActivity {
         pass = "willslibrary1";  //enter password here
 
         //This part here retrives whatever I passed through from MainActivity.java using the key word, "first_name"
-        String first_name = getIntent().getExtras().getString("first_name");
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        RelativeLayout mFrame = (RelativeLayout)inflater.inflate(R.layout.main_activity, null);
+
+        //String first_name = getIntent().getExtras().getString("first_name");
+        first_name = getIntent().getExtras().getString("first_name");
+        username = getIntent().getExtras().getString("username");
 
         //Printed it out.
         nameText = (TextView)findViewById(R.id.nameText);
         nameText.setText(first_name + '!');
 
-        //This is for the back button but I dont think the user's main page needs a back button back to the login page
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        //The result from the barcode scanner. Once the user finishes scanning, the result of that barcode
+        //Will be in the itemID inputbox. All use has to do is press SEARCH
+        //.setText (.getExtras()) I just combined it all within one sentence.
+        EditText itemIDInputBox = (EditText) findViewById(R.id.itemIDInputBox);
+        itemIDInputBox.setText(getIntent().getExtras().getString("Barcode_Result"));
+
+
+    }
+
+
+    /**
+     * This is the listening function for the barcode scanner
+     * User must have camera permissions on
+     */
+    public void barcodeScannerListener(View v){
+        ActivityCompat.requestPermissions(userMainActivity.this,
+                new String[]{Manifest.permission.CAMERA},
+                MY_PERMISSIONS_REQUEST_CAMERA);
+
     }
 
 
@@ -58,22 +104,23 @@ public class userMainActivity extends AppCompatActivity {
         EditText itemIDInputBox = (EditText) findViewById(R.id.itemIDInputBox);
 
         String itemID = itemIDInputBox.getText().toString();
-        Log.d("query", "ITEMID: " + itemID);
+        //Log.d("query", "ITEMID: " + itemID);
         //First Query to obtain the item type
         //Creating the query to obtain the type
         String itemquery = "SELECT * FROM DB_A3C994_will.dbo.item WHERE item_id='" + itemID + "';";
+        //String authorquery = "SELECT AUTHOR.author_name FROM ITEM INNER JOIN AUTHOR on AUTHOR.b_isbn = ITEM.b_isbn WHERE item_id ="+ itemID + ";";
 
         try{
             Statement itemstmt = conn.createStatement();
             ResultSet itemrs = itemstmt.executeQuery(itemquery);
-            Log.d("query", "Sending Query");
+            //Log.d("query", "Sending Query");
             //If the query returns a response
             if(itemrs.next()){
                 //Obtain the type from the response
                 String item_type = itemrs.getString("type");
                 String item_status = itemrs.getString("status");
                 String item_image = itemrs.getString("image");
-                Log.d("query", "Received Response: " + item_type);
+                //Log.d("query", "Received Response: " + item_type);
                 //Do further querying to obtain Book information
                 if(item_type.equals("Book")){
                     String isbn = itemrs.getString("b_isbn");
@@ -81,21 +128,51 @@ public class userMainActivity extends AppCompatActivity {
                     //String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book WHERE isbn='" + isbn + "';";
                     //I decided to join the book and author table in order to retrieve the author's name.
                     //https://www.youtube.com/watch?v=2HVMiPPuPIM is an extremely helpful vid on JOINS, very clear.
-                    String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book INNER JOIN DB_A3C994_will.dbo.author ON DB_A3C994_will.dbo.book.isbn = DB_A3C994_will.dbo.author.b_isbn WHERE isbn='" + isbn + "';";
+                    //String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book INNER JOIN DB_A3C994_will.dbo.author ON DB_A3C994_will.dbo.book.isbn = DB_A3C994_will.dbo.author.b_isbn WHERE isbn='" + isbn + "';";
+                    String bookquery = "SELECT * FROM DB_A3C994_will.dbo.book WHERE isbn='" + isbn + "';";
+                    String authorquery = "SELECT * FROM DB_A3C994_will.dbo.author WHERE b_isbn='" + isbn + "';";
+
                     //Obtaining information for the book
                     try{
                         Statement bookstmt = conn.createStatement();
                         ResultSet bookrs = bookstmt.executeQuery(bookquery);
 
                         if(bookrs.next()){
+                            Book book = new Book();
+
                             String title_string = bookrs.getString("title");
-                            String author_string = bookrs.getString("author_name");
                             String genre_string = bookrs.getString("genre");
                             String publisher_string = bookrs.getString("publisher");
                             String publishing_date_string = bookrs.getString("publishing_date");
                             String description_string = bookrs.getString("description");
                             //Passing the information to the activity to be displayed
+                            ArrayList<String> authorarray = new ArrayList<String>();
+                            ResultSet authorrs = bookstmt.executeQuery(authorquery);
+                            while(authorrs.next()){
+                                authorarray.add(authorrs.getString("author_name"));
+                            }
+                            String author_string = "";
+                            for(int i = 0; i < authorarray.size(); i++)
+                            {
+                                author_string = author_string + authorarray.get(i) + ", ";
+                            }
+                            author_string = author_string.substring(0, author_string.length()-2);
+
                             Intent itemBookPage = new Intent(this, itemBookActivity.class);
+
+                            book.setStatus(item_status);
+                            book.setBookTitle(title_string);
+                            book.setBookGenre(genre_string);
+                            book.setPublisher(publisher_string);
+                            book.setPublishingDate(publishing_date_string);
+                            book.setDescription(description_string);
+                            book.setBookAuthor(author_string);
+                            book.setItemNum(Integer.valueOf(itemID));
+                            book.setBookCover(item_image);
+
+                            itemBookPage.putExtra("book", book);
+                            itemBookPage.putExtra("username",username);
+                            /*
                             itemBookPage.putExtra("title_string", title_string);
                             itemBookPage.putExtra("genre_string", genre_string);
                             itemBookPage.putExtra("publisher_string", publisher_string);
@@ -103,7 +180,7 @@ public class userMainActivity extends AppCompatActivity {
                             itemBookPage.putExtra("description_string", description_string);
                             itemBookPage.putExtra("status_string", item_status);
                             itemBookPage.putExtra("author_name_string", author_string);
-
+                            */
 
 
 
@@ -127,20 +204,34 @@ public class userMainActivity extends AppCompatActivity {
                         ResultSet diskrs = diskstmt.executeQuery(diskquery);
 
                         if(diskrs.next()){
-                            String title_string = diskrs.getString("title");
-                            String datereleased_string = diskrs.getString("date_released");
-                            String genre_string = diskrs.getString("genre");
-                            String disktype_string = diskrs.getString("disk_type");
-                            String description_string = diskrs.getString("description");
+                                Disk disk = new Disk();
+                                String title_string = diskrs.getString("title");
+                                String datereleased_string = diskrs.getString("date_released");
+                                String genre_string = diskrs.getString("genre");
+                                String disktype_string = diskrs.getString("disk_type");
+                                String description_string = diskrs.getString("description");
 
-                            Intent itemDiskPage = new Intent(this, itemDiskActivity.class);
-                            itemDiskPage.putExtra("title_string", title_string);
-                            itemDiskPage.putExtra("genre_string", genre_string);
-                            itemDiskPage.putExtra("datereleased_string", datereleased_string);
-                            itemDiskPage.putExtra("disktype_string", disktype_string);
-                            itemDiskPage.putExtra("description_string", description_string);
+                                Intent itemDiskPage = new Intent(this, itemDiskActivity.class);
 
-                            startActivity(itemDiskPage);
+                                disk.setStatus(item_status);
+                                disk.setDiskTitle(title_string);
+                                disk.setDiskdatereleased(datereleased_string);
+                                disk.setDiskGenre(genre_string);
+                                disk.setDiskType(disktype_string);
+                                disk.setDiskDescription(description_string);
+                                disk.setItemNum(Integer.valueOf(itemID));
+                                disk.setDiskCover(item_image);
+
+                                itemDiskPage.putExtra("disk", disk);
+                                itemDiskPage.putExtra("username", username);
+                                /*
+                                itemDiskPage.putExtra("title_string", title_string);
+                                itemDiskPage.putExtra("genre_string", genre_string);
+                                itemDiskPage.putExtra("datereleased_string", datereleased_string);
+                                itemDiskPage.putExtra("disktype_string", disktype_string);
+                                itemDiskPage.putExtra("description_string", description_string);
+                                */
+                                startActivity(itemDiskPage);
                         }
                         else{
                             Log.d("query", "Disk does not exist in the database");
@@ -159,13 +250,21 @@ public class userMainActivity extends AppCompatActivity {
                         ResultSet otherrs = otherstmt.executeQuery(otherquery);
 
                         if(otherrs.next()){
+                            Other other = new Other();
                             String type_string = otherrs.getString("type");
+                            int other_id = otherrs.getInt("other_id");
                             String description_string = otherrs.getString("description");
 
                             Intent itemOtherPage = new Intent(this, itemOtherActivity.class);
-                            itemOtherPage.putExtra("type_string", type_string);
-                            itemOtherPage.putExtra("description_string", description_string);
+                            other.setOtherID(other_id);
+                            other.setStatus(item_status);
+                            other.setOtherType(type_string);
+                            other.setOtherDescription(description_string);
+                            other.setOtherCover(item_image);
+                            other.setItemNum(Integer.valueOf(itemID));
 
+                            itemOtherPage.putExtra("other", other);
+                            itemOtherPage.putExtra("username", username);
                             startActivity(itemOtherPage);
                         }
                         else{
@@ -180,6 +279,7 @@ public class userMainActivity extends AppCompatActivity {
                 Log.d("query", "Item does not exist in the database");
 
             }
+            conn.close();
         } catch(SQLException e){
 
         }
@@ -211,11 +311,94 @@ public class userMainActivity extends AppCompatActivity {
             Log.d("query", "Query Failed");
         }
         */
+    }
 
+    public void logoutListener(View v)
+    {
+        Intent dummy = new Intent();
+        setResult(Activity.RESULT_OK,dummy);
+        finish();
+    }
+    /**
+     * This function is part of the barcode scanner
+     * If permissions are granted then start the zXingScannerView (which reads barcode from Android)
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                zXingScannerView =new ZXingScannerView(getApplicationContext());
+                setContentView(zXingScannerView);
+                zXingScannerView.setResultHandler(this);
+                zXingScannerView.startCamera();
+                Toast.makeText(this, "Camera permission granted, Please scan barcode.", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Camera permission denied, please enable permissions to use camera.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    /**
+     * Pretty annoying, just ignore what this does. The camera requires this
+     * function to run
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
 
     }
 
+    /**
+     * This function is very important. It handles the result from the barcode scanner.
+     * The barcode result number will be stored within "result"
+     * I just made an new activity back to the user main menu with barcode number in the item id box.
+     */
+    @Override
+    public void handleResult(Result result) {
+        Toast.makeText(getApplicationContext(),"Item ID: " + result.getText(),Toast.LENGTH_SHORT).show();
+        Intent backToUserMainActivity = new Intent (this, userMainActivity.class);
+        backToUserMainActivity.putExtra("Barcode_Result", result.getText());
+        backToUserMainActivity.putExtra("first_name", first_name);
+        backToUserMainActivity.putExtra("username", username);
+        zXingScannerView.stopCamera();
 
+        startActivity(backToUserMainActivity);
+        finish();
+    }
+
+    //Going to the Catalogue page
+    public void catalogueClick(View v){
+        //Intent catalogueI = new Intent(this, catalogueMainActivity.class);
+        //startActivity(catalogueI);
+        //Intent catalogue2 = new Intent(this, catalogue2Activity.class);
+        //startActivity(catalogue2);
+        Intent cataloguetab = new Intent(this, catalogueTabActivity.class);
+        cataloguetab.putExtra("username",username);
+        startActivity(cataloguetab);
+    }
+    //Going to the My Rentals page
+    public void my_rental_Click(View v){
+        Intent myrentalI = new Intent(this, myrentalMainActivity.class);
+        myrentalI.putExtra("username",username);
+        startActivity(myrentalI);
+    }
+    //Going to the My Fines page
+    public void my_fines_Click(View v){
+        conn = connectionclass(un, pass, db, ip);   //I need this so I can query to the database
+        Intent myfinesI = new Intent(this, myfinesMainActivity.class);
+
+        myfinesI.putExtra("username", username);
+        startActivity(myfinesI);
+        rentEligibilityChecker asdf = new rentEligibilityChecker();
+
+
+    }
 
 
 
@@ -239,19 +422,5 @@ public class userMainActivity extends AppCompatActivity {
 
         return connection;
     }
-    //Going to the Catalogue page
-    public void catalogueClick(View v){
-        Intent catalogueI = new Intent(this, catalogueMainActivity.class);
-        startActivity(catalogueI);
-    }
-    //Going to the My Rentals page
-    public void my_rental_Click(View v){
-        Intent myrentalI = new Intent(this, myrentalMainActivity.class);
-        startActivity(myrentalI);
-    }
-    //Going to the My Fines page
-    public void my_fines_Click(View v){
-        Intent myfinesI = new Intent(this, myfinesMainActivity.class);
-        startActivity(myfinesI);
-    }
+
 }

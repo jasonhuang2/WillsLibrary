@@ -82,6 +82,7 @@ public class userCreationActivity extends AppCompatActivity {
             //errorBox.setText(query);
             stmt.execute(query);
             //INSERT INTO USERS (username,password,creation_date,address,first_name,last_name,amount_of_money,a_username) VALUES ('h','','2018-06-13','p','p','p',0.00,'ADMIN');
+            conn.close();
         }
         catch(SQLException e)
         {

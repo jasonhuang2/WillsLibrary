@@ -25,6 +25,7 @@ import java.sql.Statement;
 public class MainActivity extends AppCompatActivity{
 
     public static final int REQUEST_CODE_USER_CREATION = 1001;
+    public static final int USER_LOGOUT = 1010;
     Connection conn;
     String un, pass, db, ip;
 
@@ -74,7 +75,8 @@ public class MainActivity extends AppCompatActivity{
                         resultText.setText("Logged in");    //Set the text to Logged in to let the user know
                         Intent intent = new Intent(this, userMainActivity.class);   //Since now the user is logged in, switch over to the user main menu layout
                         intent.putExtra("first_name", first_name); //As explained in userMainActivity, first_name will be stored under the key word "first_name"
-                        startActivity(intent);
+                        intent.putExtra("username",usernameInputBox.getText().toString());
+                        startActivityForResult(intent, USER_LOGOUT);
                     }else {
                         resultText.setText("Incorrect username or password");
                     }
@@ -105,6 +107,7 @@ public class MainActivity extends AppCompatActivity{
                         resultText.setText("Logged in");    //Set the text to Logged in to let the user know
                         Intent intent = new Intent(this, userMainActivity.class);   //Since now the user is logged in, switch over to the user main menu layout
                         intent.putExtra("first_name", first_name); //As explained in userMainActivity, first_name will be stored under the key word "first_name"
+                        intent.putExtra("username",usernameInputBox.getText().toString());
                         startActivity(intent);
                     }else {
                         resultText.setText("Incorrect username or password");
@@ -112,6 +115,7 @@ public class MainActivity extends AppCompatActivity{
                 } else {
                     resultText.setText("Incorrect username or password");
                 }
+                conn.close();
             }catch(SQLException e)
             {
                 e.printStackTrace();
@@ -123,6 +127,9 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        TextView resultText = (TextView) findViewById(R.id.loginTextView2);
+        EditText passBox = (EditText) findViewById(R.id.passwordInputBox);
+        EditText userBox =(EditText) findViewById(R.id.usernameInputBox);
         switch(requestCode){
             case REQUEST_CODE_USER_CREATION:
                 if(resultCode == Activity.RESULT_OK){
@@ -130,9 +137,7 @@ public class MainActivity extends AppCompatActivity{
                     String message = data.getStringExtra("loginTextView2");
                     CharSequence password = data.getStringExtra("passwordInputBox");
 
-                    TextView resultText = (TextView) findViewById(R.id.loginTextView2);
-                    EditText passBox = (EditText) findViewById(R.id.passwordInputBox);
-                    EditText userBox =(EditText) findViewById(R.id.usernameInputBox);
+
                     resultText.setText(message);
                     passBox.setText(password);
                     userBox.setText(username);
@@ -140,6 +145,14 @@ public class MainActivity extends AppCompatActivity{
                 }
                 else if(resultCode == Activity.RESULT_CANCELED)
                     Log.d("ERROR","User Exited task");
+            case USER_LOGOUT:
+                resultText.setText("Who are you?");
+                userBox.setText("");
+                passBox.setText("");
+
+
+
+
         }
     }
 

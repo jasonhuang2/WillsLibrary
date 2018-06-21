@@ -28,8 +28,8 @@
         android:id="@+id/dgenreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/date_releasedTextView"
         android:layout_alignTop="@+id/genreTextViewBox"
+        android:layout_toStartOf="@+id/disktitleTextViewBox"
         android:text="Genre:"
         android:textStyle="bold" />
 
@@ -46,17 +46,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="137dp"
-        android:layout_toStartOf="@+id/disktitleTextViewBox"
+        android:layout_alignStart="@+id/date_releasedTextView"
+        android:layout_marginTop="138dp"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/overdueMessage"
+        android:layout_width="123dp"
+        android:layout_height="71dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="88dp"
+        android:text="You currently have a outstanding balance. Please visit the front desk"
+        android:textAlignment="center"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/disktypeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="165dp"
+        android:layout_marginTop="166dp"
+        android:layout_toStartOf="@+id/disktitleTextViewBox"
         android:text="Disk Type: "
         android:textStyle="bold" />
 
@@ -87,10 +99,57 @@
         android:text="TextView" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/bookImage"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_below="@+id/disktitleTextViewBox"
         android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/diskimage" />
+
+    <TextView
+        android:id="@+id/availableForRentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/datereleasedTextView"
+        android:layout_alignTop="@+id/inStockText"
+        android:text="Availability"
+        android:textAllCaps="true"
+        android:textColor="@android:color/holo_green_light"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/inStockText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/descriptionTextViewBox"
+        android:layout_marginBottom="80dp"
+        android:text="Availability"
+        android:textAllCaps="true"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/notAvailableForRent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/availableForRentText"
+        android:layout_toStartOf="@+id/dgenreTextView"
+        android:text="RENTED"
+        android:textAllCaps="true"
+        android:textColor="@android:color/holo_red_light"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/rentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/datereleasedTextView"
+        android:layout_marginBottom="14dp"
+        android:onClick="onRentalClick"
+        android:text="RENT ITEM" />
 </RelativeLayout>
