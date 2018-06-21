@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/WillsLibrary">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/WillsLibrary">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +28,7 @@
         <activity android:name=".catalogueMainActivity" />
         <activity android:name=".myrentalMainActivity" />
         <activity android:name=".myfinesMainActivity" />
-        <activity android:name=".item" />
+        <activity android:name=".adminAddItemActivity" />
         <activity android:name=".itemBookActivity" />
         <activity android:name=".itemDiskActivity" />
         <activity android:name=".itemOtherActivity" />
@@ -37,7 +38,9 @@
             android:label="@string/title_activity_catalogue_tab"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".adminActivity" />
-        <activity android:name=".returnItem"></activity>
+        <activity android:name=".returnItem" />
+        <activity android:name=".adminActiveUsers" />
+        <activity android:name=".adminActiveRentals"></activity>
     </application>
 
 </manifest>
