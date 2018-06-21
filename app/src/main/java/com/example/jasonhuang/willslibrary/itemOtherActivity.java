@@ -64,21 +64,40 @@ public class itemOtherActivity extends AppCompatActivity {
         TextView inStockText = (TextView) findViewById(R.id.inStockText);
         Button rentButton = (Button)findViewById(R.id.rentButton);
 
-        //To display "available" or "rented" for the user to see
-        //"In_Store" means item is available for rent.
-        //"Rented" means it's rented
-        //"In_Stock" means it's available but owner does not want it rented
-        if(toDisplay.getStatus().equals("1_In_Store")){
-            availableForRentText.setVisibility(View.VISIBLE);
 
-        }else if (toDisplay.getStatus().equals("3_Rented")){
-            notAvailableForRentText.setVisibility(View.VISIBLE);
+        //canIRent will check to see if the username is able to rent or not by determining if they're are any outstanding fees.
+        //Parameters: The username string.
+        //Returns 0 if username is NOT able to rent (has outstanding fees)
+        //Returns 1 if username is ABLE to rent (has NO outstanding fees)
+        rentEligibilityChecker canIRent = new rentEligibilityChecker();
+
+        if(canIRent.check(username) == 0){
+            //This username cannot rent (has overdue fees to pay)
+
+            TextView overdueMessage = (TextView) findViewById(R.id.overdueMessage);
+            overdueMessage.setVisibility(View.VISIBLE);
             rentButton.setEnabled(false);
         }else{
-            //status is not "in_store" or "rented" then this part of the code is "In_stock"
-            inStockText.setVisibility(View.VISIBLE);
-            rentButton.setEnabled(false);
+            //This username is able to rent
+
+            //To display "available" or "rented" for the user to see
+            //"In_Store" means item is available for rent.
+            //"Rented" means it's rented
+            //"In_Stock" means it's available but owner does not want it rented
+            if(toDisplay.getStatus().equals("1_In_Store")){
+                availableForRentText.setVisibility(View.VISIBLE);
+
+            }else if (toDisplay.getStatus().equals("3_Rented")){
+                notAvailableForRentText.setVisibility(View.VISIBLE);
+                rentButton.setEnabled(false);
+            }else{
+                //status is not "in_store" or "rented" then this part of the code is "In_stock"
+                inStockText.setVisibility(View.VISIBLE);
+                rentButton.setEnabled(false);
+            }
         }
+
+
 
     }
     public void onRentalClick(View v)

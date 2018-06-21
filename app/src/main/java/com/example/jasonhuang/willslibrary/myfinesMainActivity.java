@@ -57,13 +57,13 @@ public class myfinesMainActivity extends AppCompatActivity {
         TextView walletBalanceTextView = (TextView) findViewById(R.id.walletBalance);
 
 
-
         try{
             String checkIfOverDueQuery = "SELECT * FROM DB_A3C994_will.dbo.fee WHERE paid = 'false' AND u_username='" + username + "';";
             Statement checkOverDueStatement = conn.createStatement();
             ResultSet overdueRS = checkOverDueStatement.executeQuery(checkIfOverDueQuery);
 
             if(overdueRS.next()){
+                // IT IS OVERDUE
                 overDueList =  overdueRS.getString("i_item_id");
 
                 overdueText.setVisibility(View.VISIBLE);
@@ -86,7 +86,6 @@ public class myfinesMainActivity extends AppCompatActivity {
         }catch(SQLException e){
 
         }
-
 
     }
 

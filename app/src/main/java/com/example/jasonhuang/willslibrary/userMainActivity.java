@@ -94,6 +94,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
         ActivityCompat.requestPermissions(userMainActivity.this,
                 new String[]{Manifest.permission.CAMERA},
                 MY_PERMISSIONS_REQUEST_CAMERA);
+
     }
 
 
@@ -350,6 +351,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
     @Override
     protected void onPause() {
         super.onPause();
+
     }
 
     /**
@@ -359,15 +361,15 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
      */
     @Override
     public void handleResult(Result result) {
-        Toast.makeText(getApplicationContext(),result.getText(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Item ID: " + result.getText(),Toast.LENGTH_SHORT).show();
         Intent backToUserMainActivity = new Intent (this, userMainActivity.class);
         backToUserMainActivity.putExtra("Barcode_Result", result.getText());
         backToUserMainActivity.putExtra("first_name", first_name);
+        backToUserMainActivity.putExtra("username", username);
         zXingScannerView.stopCamera();
 
         startActivity(backToUserMainActivity);
-       // zXingScannerView.resumeCameraPreview(this);
-
+        finish();
     }
 
     //Going to the Catalogue page
@@ -393,6 +395,8 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
 
         myfinesI.putExtra("username", username);
         startActivity(myfinesI);
+        rentEligibilityChecker asdf = new rentEligibilityChecker();
+
 
     }
 
