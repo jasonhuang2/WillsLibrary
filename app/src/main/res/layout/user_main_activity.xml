@@ -7,13 +7,14 @@
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="79dp"
+        android:layout_alignStart="@+id/textView5"
         android:layout_marginTop="34dp"
         android:text="Welcome"
         android:textAlignment="center"
-        android:textSize="20sp" />
+        android:textColor="@android:color/black"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/nameText"
@@ -23,38 +24,41 @@
         android:layout_toEndOf="@+id/spaceTextView"
         android:text="namegoeshere"
         android:textAlignment="center"
-        android:textSize="20sp" />
+        android:textColor="@color/bright_accent_blue"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:fontFamily="serif-monospace" />
 
     <Button
         android:id="@+id/catalogue_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="153dp"
-        android:layout_marginStart="16dp"
-        android:onClick="catalogueClick"
-        android:text="Catalogue" />
+        android:layout_marginBottom="171dp"
+        android:layout_marginStart="21dp"
+        android:background="@mipmap/catalogue"
+        android:onClick="catalogueClick" />
 
     <Button
         android:id="@+id/my_rental_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/catalogue_button"
-        android:layout_marginEnd="33dp"
-        android:onClick="my_rental_Click"
-        android:text="My Rentals" />
+        android:layout_marginEnd="21dp"
+        android:background="@mipmap/rentals"
+        android:onClick="my_rental_Click" />
 
     <Button
         android:id="@+id/fine_button"
-        android:layout_width="102dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_below="@+id/catalogue_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="88dp"
-        android:onClick="my_fines_Click"
-        android:text="My Fines" />
+        android:layout_marginTop="-174dp"
+        android:background="@mipmap/fines"
+        android:onClick="my_fines_Click" />
 
     <TextView
         android:id="@+id/spaceTextView"
@@ -81,16 +85,18 @@
         android:layout_above="@+id/itemIDInputBox"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-128dp"
-        android:text="ITEM ID NUMBER" />
+        android:text="ENTER ITEM ID NUMBER:"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_below="@+id/itemIDInputBox"
         android:layout_centerHorizontal="true"
+        android:background="@mipmap/search"
         android:onClick="itemLookUpListener"
-        android:text="Search" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <Button
         android:id="@+id/barcodeButton"
@@ -98,17 +104,54 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/itemIDInputBox"
-        android:onClick="barcodeScannerListener"
-        android:text="BARCODE" />
+        android:background="@mipmap/barcode"
+        android:onClick="barcodeScannerListener" />
 
     <Button
         android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/catalogue_button"
         android:layout_marginBottom="17dp"
-        android:onClick="logoutListener"
-        android:text="Logout" />
+        android:background="@mipmap/logout"
+        android:onClick="logoutListener" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fine_button"
+        android:layout_centerHorizontal="true"
+        android:text="MY FINES"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:fontFamily="sans-serif-condensed" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/catalogue_button"
+        android:layout_marginEnd="41dp"
+        android:layout_marginTop="-171dp"
+        android:text="MY RENTALS"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:fontFamily="sans-serif-condensed" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/catalogue_button"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="-171dp"
+        android:text="CATALOGUE"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:fontFamily="sans-serif-condensed" />
 
 </RelativeLayout>

@@ -55,6 +55,7 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_main_activity);
+        setTitle("Will's Library");
 
         //NOTE: Fill these attributes before you execute this program
         //NOTE: For ip address, if you are provided with a port number, the format will be "ipaddress:portnumber"
