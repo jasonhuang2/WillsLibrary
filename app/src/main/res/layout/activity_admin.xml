@@ -3,12 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="216dp"
+        android:layout_height="126dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        app:srcCompat="@mipmap/wllogo" />
+
     <TextView
         android:id="@+id/admin_welcome"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
-        android:layout_alignTop="@+id/admin_name"
-        android:layout_toStartOf="@+id/admin_name"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView"
+        android:layout_marginStart="92dp"
         android:text="Welcome"
         android:textAppearance="@android:style/TextAppearance.Large" />
 
@@ -17,21 +28,22 @@
         android:layout_width="74dp"
         android:layout_height="32dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="104dp"
-        android:layout_marginTop="21dp"
+        android:layout_alignTop="@+id/admin_welcome"
+        android:layout_marginEnd="111dp"
         android:textAppearance="@android:style/TextAppearance.Large" />
 
     <Button
         android:id="@+id/activeUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="187dp"
+        android:layout_toStartOf="@+id/logoutButton"
+        android:background="#248281"
         android:onClick="activeUsersOnClick"
-        android:text="Active Users" />
+        android:text="Active Users"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/addItemButton"
@@ -40,18 +52,25 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/activeUserButton"
         android:layout_marginEnd="48dp"
+        android:background="#248281"
         android:onClick="addItemListener"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
         android:text="Add Item" />
 
     <Button
         android:id="@+id/activeRentalsButton"
         android:layout_width="115dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/activeUserButton"
-        android:layout_marginTop="202dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="182dp"
+        android:layout_marginStart="41dp"
+        android:background="#248281"
         android:onClick="activeRentalsOnClick"
-        android:text="Active Rentals" />
+        android:text="Active Rentals"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/returnItemButton"
@@ -59,7 +78,10 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/activeRentalsButton"
         android:layout_alignStart="@+id/addItemButton"
+        android:background="#248281"
         android:onClick="returnItemOnClick"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
         android:text="Return Item" />
 
     <Button
@@ -69,6 +91,22 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="54dp"
+        android:background="#248281"
         android:onClick="logoutOnClick"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
         android:text="Logout" />
+
+    <TextView
+        android:id="@+id/adminText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="19dp"
+        android:rotation="-45"
+        android:text="ADMIN"
+        android:textColor="#ff0000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 </RelativeLayout>
