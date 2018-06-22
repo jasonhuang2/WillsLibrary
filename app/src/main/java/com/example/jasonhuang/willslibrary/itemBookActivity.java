@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -212,7 +213,7 @@ public class itemBookActivity extends AppCompatActivity {
             Log.i("ERROR",e.getMessage());
 
         }
-
+        Toast.makeText(getBaseContext(), "Item Rented!", Toast.LENGTH_SHORT).show();
         //SELECT username FROM DB_A3C994_will.dbo.users WHERE username
         Intent intent = new Intent();
         setResult(Activity.RESULT_OK,intent);

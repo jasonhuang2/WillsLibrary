@@ -16,6 +16,7 @@ public class adminActivity extends AppCompatActivity {
         String admin_name_var=getIntent().getStringExtra("first_name");
         TextView admin_name = (TextView) findViewById(R.id.admin_name);
         admin_name.setText(admin_name_var);
+        setTitle("Adminstrator Menu");
 
     }
     //This will open an action page that will list the active users and then we can click on them and view there rentals.

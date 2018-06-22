@@ -37,6 +37,7 @@ public class userCreationActivity extends AppCompatActivity {
         db = "DB_A3C994_will";    //emter database name here
         un = "DB_A3C994_will_admin";    //enter username here
         pass = "willslibrary1";  //enter password here
+        setTitle("User Creation");
     }
 
     public void onSubmit(View v) {
