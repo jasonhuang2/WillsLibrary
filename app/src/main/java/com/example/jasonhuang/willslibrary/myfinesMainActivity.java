@@ -44,6 +44,7 @@ public class myfinesMainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myfines_activity);
+        setTitle("My Fines");
 
 
         username = getIntent().getStringExtra("username");

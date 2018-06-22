@@ -37,6 +37,7 @@ public class adminActiveUsers extends AppCompatActivity {
         setContentView(R.layout.activity_admin_active_users);
         TextView activeUser = (TextView) findViewById(R.id.activeUserData);
         activeUser.setText("");
+        setTitle("Will's Library's Active Users");
 
         //NOTE: Fill these attributes before you execute this program
         //NOTE: For ip address, if you are provided with a port number, the format will be "ipaddress:portnumber"

@@ -32,9 +32,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="iconShape" value="HRECT" />
-                                      <entry key="imageAsset" value="C:\Users\Shaheed\Documents\CPSC471\search.png" />
-                                      <entry key="outputName" value="search" />
+                                      <entry key="cropped" value="true" />
+                                      <entry key="iconShape" value="NONE" />
+                                      <entry key="imageAsset" value="C:\Users\Shaheed\Documents\CPSC471\logo-preview-cafb302a-5ebd-4fb0-9094-df878dfc7be7.png" />
+                                      <entry key="outputName" value="wllogo" />
                                     </map>
                                   </option>
                                 </PersistentState>
