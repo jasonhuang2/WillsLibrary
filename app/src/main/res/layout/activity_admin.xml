@@ -40,7 +40,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/activeUserButton"
         android:layout_marginEnd="48dp"
-        android:onClick="addItemOnClick"
+        android:onClick="addItemListener"
         android:text="Add Item" />
 
     <Button
