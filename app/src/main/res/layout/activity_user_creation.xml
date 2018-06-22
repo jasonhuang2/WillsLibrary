@@ -1,134 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/relativeLayout">
 
     <Button
         android:id="@+id/Submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginBottom="40dp"
         android:layout_marginEnd="46dp"
         android:onClick="onSubmit"
-        android:text="submit" />
+        android:text="submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/first_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/firstName_label"
-        android:layout_alignParentEnd="true"
         android:layout_marginEnd="23dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="68dp"
         android:ems="10"
-        android:inputType="text|textPersonName" />
+        android:inputType="text|textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/firstName_label"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/firstName_label"
         android:layout_width="98dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_marginLeft="19dp"
         android:layout_marginStart="19dp"
         android:layout_marginTop="83dp"
-        android:text=" First Name" />
+        android:text=" First Name"
+        app:layout_constraintBottom_toTopOf="@+id/LastName_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/LastName_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/firstName_label"
-        android:layout_marginTop="130dp"
-        android:text="Last Name" />
+        android:layout_marginTop="28dp"
+        android:text="Last Name"
+        app:layout_constraintBottom_toTopOf="@+id/username_label"
+        app:layout_constraintStart_toStartOf="@+id/firstName_label"
+        app:layout_constraintTop_toBottomOf="@+id/firstName_label" />
 
     <EditText
         android:id="@+id/last_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/first_name"
-        android:layout_below="@+id/first_name"
+        android:layout_marginLeft="59dp"
+        android:layout_marginStart="59dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/username"
+        app:layout_constraintStart_toEndOf="@+id/LastName_label"
+        app:layout_constraintTop_toBottomOf="@+id/first_name" />
 
     <TextView
         android:id="@+id/username_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/firstName_label"
-        android:layout_marginTop="179dp"
-        android:text="Username" />
+        android:layout_marginBottom="27dp"
+        android:layout_marginTop="30dp"
+        android:text="Username"
+        app:layout_constraintBottom_toTopOf="@+id/address_label"
+        app:layout_constraintStart_toStartOf="@+id/firstName_label"
+        app:layout_constraintTop_toBottomOf="@+id/LastName_label" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/first_name"
-        android:layout_below="@+id/last_name"
+        android:layout_marginLeft="64dp"
+        android:layout_marginStart="64dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/address"
+        app:layout_constraintStart_toEndOf="@+id/username_label"
+        app:layout_constraintTop_toBottomOf="@+id/last_name" />
 
     <TextView
         android:id="@+id/address_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/firstName_label"
-        android:layout_marginTop="224dp"
-        android:text="Address" />
+        android:layout_marginTop="27dp"
+        android:text="Address"
+        app:layout_constraintStart_toStartOf="@+id/firstName_label"
+        app:layout_constraintTop_toBottomOf="@+id/username_label" />
 
     <EditText
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/first_name"
-        android:layout_below="@+id/username"
+        android:layout_marginLeft="76dp"
+        android:layout_marginStart="76dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/address_label"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <TextView
         android:id="@+id/password_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/firstName_label"
-        android:layout_marginBottom="223dp"
-        android:text="password" />
+        android:layout_marginTop="27dp"
+        android:text="password"
+        app:layout_constraintBottom_toTopOf="@+id/passwordConfirm_label"
+        app:layout_constraintStart_toStartOf="@+id/firstName_label"
+        app:layout_constraintTop_toBottomOf="@+id/address_label" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/first_name"
-        android:layout_below="@+id/address"
+        android:layout_marginBottom="27dp"
+        android:layout_marginLeft="66dp"
+        android:layout_marginStart="66dp"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/passwordConfirm"
+        app:layout_constraintStart_toEndOf="@+id/password_label"
+        app:layout_constraintTop_toBottomOf="@+id/address" />
 
     <TextView
         android:id="@+id/passwordConfirm_label"
         android:layout_width="85dp"
         android:layout_height="39dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/firstName_label"
         android:layout_marginBottom="143dp"
-        android:text="Confirm Password" />
+        android:layout_marginTop="41dp"
+        android:text="Confirm Password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/firstName_label"
+        app:layout_constraintTop_toBottomOf="@+id/password_label" />
 
     <EditText
         android:id="@+id/passwordConfirm"
-        android:layout_width="wrap_content"
+        android:layout_width="215dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/passwordConfirm_label"
-        android:layout_alignStart="@+id/first_name"
+        android:layout_marginLeft="42dp"
+        android:layout_marginStart="42dp"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/passwordConfirm_label"
+        app:layout_constraintStart_toEndOf="@+id/passwordConfirm_label"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <TextView
         android:id="@+id/errorBox"
         android:layout_width="195dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="110dp" />
+        android:layout_marginBottom="110dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
