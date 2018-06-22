@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/WillsLibrary">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/WillsLibrary">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +39,8 @@
             android:label="@string/title_activity_catalogue_tab"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".adminActivity" />
-        <activity android:name=".returnItem"></activity>
+        <activity android:name=".returnItem" />
+        <activity android:name=".adminAddOtherItemActivity"></activity>
     </application>
 
 </manifest>

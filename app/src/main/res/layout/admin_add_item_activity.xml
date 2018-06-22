@@ -1,40 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/publisherNameInput"
         android:layout_width="92dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="206dp"
-        android:layout_marginStart="88dp"
+        android:layout_alignTop="@+id/publisherNameText"
+        android:layout_toStartOf="@+id/typeOfItemSpinner"
         android:ems="10"
         android:inputType="textPersonName"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <EditText
         android:id="@+id/authorNameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/bookNameInput"
-        android:layout_marginTop="195dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="204dp"
+        android:layout_toEndOf="@+id/bookNameText"
         android:ems="10"
         android:inputType="textPersonName"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/itemText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="64dp"
+        android:layout_above="@+id/isbnInput"
+        android:layout_alignStart="@+id/publisherNameText"
+        android:layout_marginBottom="-63dp"
         android:text="Type of item to add:"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <Spinner
         android:id="@+id/typeOfItemSpinner"
@@ -42,8 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/itemText"
-        android:entries="@array/typeOfItemString"
-        android:layout_marginEnd="26dp" />
+        android:layout_marginEnd="27dp"
+        android:entries="@array/typeOfItemString" />
 
     <TextView
         android:id="@+id/bookNameText"
@@ -51,9 +49,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/itemText"
-        android:layout_marginTop="153dp"
+        android:layout_marginTop="214dp"
         android:text="Book Name:"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <EditText
         android:id="@+id/bookNameInput"
@@ -64,78 +62,226 @@
         android:layout_marginEnd="48dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/authorNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/authorNameInput"
         android:layout_alignEnd="@+id/bookNameText"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="212dp"
         android:text="Author:"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/publisherNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/publisherNameInput"
-        android:layout_marginEnd="-77dp"
-        android:layout_toStartOf="@+id/publisherNameInput"
+        android:layout_alignStart="@+id/descriptionText"
+        android:layout_alignTop="@+id/publishingDateText"
         android:text="Publisher:"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/publishingDateText"
         android:layout_width="77dp"
         android:layout_height="37dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/publisherNameInput"
-        android:layout_marginEnd="111dp"
+        android:layout_alignBottom="@+id/publishingDateInput"
+        android:layout_toStartOf="@+id/publishingDateInput"
         android:text="Publishing Date:"
-        android:visibility="visible" />
-
-    <EditText
-        android:id="@+id/publishingDateInput"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/typeOfItemSpinner"
-        android:layout_alignTop="@+id/publisherNameInput"
-        android:ems="10"
-        android:inputType="time"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/descriptionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/publisherNameText"
-        android:layout_marginBottom="161dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="99dp"
+        android:layout_marginStart="25dp"
         android:text="Description:"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <EditText
         android:id="@+id/descriptionInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/descriptionText"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="69dp"
+        android:layout_toEndOf="@+id/bookNameText"
         android:ems="10"
         android:inputType="textPersonName"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/addItemButton"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="156dp"
+        android:onClick="addButtonBookListener"
+        android:text="Add Book"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/isbnText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/isbnInput"
+        android:layout_alignEnd="@+id/bookNameText"
+        android:text="ISBN:"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/isbnInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/authorNameInput"
+        android:layout_marginTop="63dp"
+        android:ems="10"
+        android:inputType="number"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/publishingDateInput"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="150dp"
+        android:ems="10"
+        android:inputType="date"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/genreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/genreInput"
+        android:layout_alignEnd="@+id/bookNameText"
+        android:text="Genre:"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/genreInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/authorNameInput"
+        android:layout_marginTop="130dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/diskTitleText"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="117dp"
+        android:layout_toStartOf="@+id/publisherNameInput"
+        android:layout_weight="1"
+        android:text="Disk Name:"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/dateReleasedText"
+        android:layout_width="73dp"
+        android:layout_height="34dp"
+        android:layout_above="@+id/bookNameText"
+        android:layout_marginBottom="-214dp"
+        android:layout_toStartOf="@+id/publisherNameInput"
+        android:text="Date Released:"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/diskGenreText"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/bookNameText"
+        android:layout_toStartOf="@+id/publisherNameInput"
+        android:text="Genre:"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/diskGenreInput"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/authorNameInput"
+        android:layout_alignStart="@+id/authorNameInput"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/diskTypeText"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/authorNameInput"
+        android:layout_alignStart="@+id/itemText"
+        android:text="Disk Type:"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/diskTypeInput"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/publisherNameInput"
+        android:layout_alignStart="@+id/authorNameInput"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/diskDescriptionText"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/publishingDateText"
+        android:layout_toStartOf="@+id/authorNameInput"
+        android:text="Description:"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/diskDescriptionInput"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/authorNameInput"
+        android:layout_below="@+id/publisherNameText"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/addDiskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="54dp"
-        android:onClick="addButtonBookListener"
-        android:text="Add Book"
-        android:visibility="visible" />
+        android:layout_marginBottom="15dp"
+        android:onClick="addDiskListener"
+        android:text="Add Disk"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/diskTitleInput"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/authorNameInput"
+        android:layout_below="@+id/isbnInput"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/dateReleasedInput"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/bookNameText"
+        android:layout_alignStart="@+id/authorNameInput"
+        android:layout_marginBottom="-214dp"
+        android:ems="10"
+        android:inputType="date"
+        android:visibility="invisible" />
 
 </RelativeLayout>
