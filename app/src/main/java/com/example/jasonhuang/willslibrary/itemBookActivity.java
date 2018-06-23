@@ -7,6 +7,7 @@ import android.media.Image;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -66,6 +67,8 @@ public class itemBookActivity extends AppCompatActivity {
         TextView publishing_date_Box = (TextView)findViewById(R.id.publishingDateTextView);
         TextView descriptionBox = (TextView)findViewById(R.id.descriptionTextViewBox);
         ImageView bookImage = (ImageView)findViewById(R.id.bookImage);
+
+        descriptionBox.setMovementMethod(new ScrollingMovementMethod()); //This allows the TextView Box to be scrollable
 
         titleNameBox.setText(toDisplay.getBookTitle());
         authorBox.setText(toDisplay.getBookAuthor());

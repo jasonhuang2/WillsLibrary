@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".adminAddOtherItemActivity">
+    tools:context=".adminAddOtherItemActivity"
+    android:background="#e6e6e6">
 
     <TextView
         android:id="@+id/otherIdText"
@@ -14,6 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="49dp"
         android:layout_marginTop="87dp"
+        android:textStyle="bold"
         android:text="ID:" />
 
     <TextView
@@ -23,6 +25,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/otherIdText"
         android:layout_marginTop="170dp"
+        android:textStyle="bold"
         android:text="Type:" />
 
     <TextView
@@ -31,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/otherIdText"
         android:layout_centerVertical="true"
+        android:textStyle="bold"
         android:text="Description:" />
 
     <EditText
@@ -69,6 +73,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="124dp"
+        android:background="#248281"
         android:onClick="addOtherButtonListener"
-        android:text="Add" />
+        android:text="Add"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 </RelativeLayout>

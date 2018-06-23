@@ -95,6 +95,8 @@
         android:layout_height="143dp"
         android:layout_below="@+id/descriptionTextView"
         android:layout_centerHorizontal="true"
+        android:maxLines="200"
+        android:scrollbars = "vertical"
         android:text="TextView" />
 
     <ImageView
