@@ -19,7 +19,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Shaheed\Documents\CPSC471\catalogue.png" />
+                                      <entry key="imageAsset" value="C:\Users\Shaheed\Documents\CPSC471\bookopen.png" />
                                       <entry key="outputName" value="otherimage" />
                                     </map>
                                   </option>
@@ -29,13 +29,27 @@
                             <entry key="launcherLegacy">
                               <value>
                                 <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="image">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="trimmed" value="true" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="cropped" value="true" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="C:\Users\Shaheed\Documents\CPSC471\logo-preview-cafb302a-5ebd-4fb0-9094-df878dfc7be7.png" />
-                                      <entry key="outputName" value="wllogo" />
+                                      <entry key="imageAsset" value="C:\Users\Shaheed\Documents\CPSC471\bookopen.png" />
+                                      <entry key="outputName" value="bookopen" />
                                     </map>
                                   </option>
                                 </PersistentState>

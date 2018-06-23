@@ -1,6 +1,7 @@
 package com.example.jasonhuang.willslibrary;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -82,6 +83,11 @@ public class myfinesMainActivity extends AppCompatActivity {
 
             if(walletRS.next()){
                 walletBalanceTextView.setText("$" + walletRS.getString("amount_of_money"));
+                if(Double.parseDouble(walletRS.getString("amount_of_money")) <= 0){
+                    walletBalanceTextView.setTextColor(Color.RED);
+                }
+                else
+                    walletBalanceTextView.setTextColor(Color.BLACK);
             }
 
         }catch(SQLException e){

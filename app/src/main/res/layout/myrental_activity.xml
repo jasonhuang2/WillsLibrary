@@ -19,7 +19,10 @@
         android:layout_above="@+id/rentallv"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="-88dp"
+        android:layout_marginStart="11dp"
         android:text="Item ID"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
@@ -31,6 +34,8 @@
         android:layout_marginBottom="-88dp"
         android:layout_marginStart="90dp"
         android:text="Item Title"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
@@ -38,19 +43,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/rentallv"
-        android:layout_alignParentEnd="true"
+        android:layout_alignEnd="@+id/imageView4"
         android:layout_marginBottom="-88dp"
-        android:layout_marginEnd="128dp"
         android:text="Due Date"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="69dp"
+        android:layout_height="42dp"
         android:layout_above="@+id/rentallv"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="-88dp"
+        android:layout_marginEnd="11dp"
         android:text="Cost/Day Overdue"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
         android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="140dp"
+        android:layout_height="89dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:srcCompat="@mipmap/bookopen" />
 </RelativeLayout>
