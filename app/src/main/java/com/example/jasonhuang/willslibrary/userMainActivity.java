@@ -86,6 +86,14 @@ public class userMainActivity extends AppCompatActivity implements ZXingScannerV
 
     }
 
+    /**
+     * What is this function for? Disable the back button so user must press the logout button instead
+     *  to logout.
+     */
+    @Override
+    public void onBackPressed() {
+       //Once back button is pressed, do nOTHINGGGGGGGGGGGG
+    }
 
     /**
      * This is the listening function for the barcode scanner

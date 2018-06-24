@@ -19,6 +19,16 @@ public class adminActivity extends AppCompatActivity {
         setTitle("Adminstrator Menu");
 
     }
+    
+    /**
+     * What is this function for? Disable the back button so user must press the logout button instead
+     *  to logout.
+     */
+    @Override
+    public void onBackPressed() {
+        //Once back button is pressed, do nOTHINGGGGGGGGGGGG
+    }
+
     //This will open an action page that will list the active users and then we can click on them and view there rentals.
     public void activeUsersOnClick(View v){
         Intent intent = new Intent(this,adminActiveUsers.class);
