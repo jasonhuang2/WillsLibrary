@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -30,6 +31,13 @@ public class myfinesMainActivity extends AppCompatActivity {
     double balanceDue;
     private String amountOfMoneyInAccount;
 
+    String amountDueString, walletBalanceString, feeID;
+    double amountDueDouble;
+    double walletBalance;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -43,20 +51,22 @@ public class myfinesMainActivity extends AppCompatActivity {
         conn = connectionclass(un, pass, db, ip);   //I need this so I can query to the database
 
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myfines_activity);
         setTitle("My Fines");
 
 
         username = getIntent().getStringExtra("username");
-
-
-        conn = connectionclass(un, pass, db, ip);   //I need this so I can query to the database
         TextView noOverDueText = (TextView)findViewById(R.id.noOverDueText);
         TextView overdueText = (TextView)findViewById(R.id.overdueText);
         TextView overdueText2 = (TextView)findViewById(R.id.overdueText2);
         TextView overdueListTextView = (TextView) findViewById(R.id.overdueItemList);
         TextView walletBalanceTextView = (TextView) findViewById(R.id.walletBalance);
+        TextView amountDueInput = (TextView) findViewById(R.id.amountDueInput);
+        TextView amountDueText = (TextView) findViewById(R.id.amountDueText);
+        Button payButton = (Button)findViewById(R.id.payButton);
+
 
 
         try{
@@ -67,11 +77,27 @@ public class myfinesMainActivity extends AppCompatActivity {
             if(overdueRS.next()){
                 // IT IS OVERDUE
                 overDueList =  overdueRS.getString("i_item_id");
+                feeID = overdueRS.getString("fee_id");
 
                 overdueText.setVisibility(View.VISIBLE);
                 overdueText2.setVisibility(View.VISIBLE);
                 overdueListTextView.setVisibility(View.VISIBLE);
                 overdueListTextView.setText(overDueList);
+                amountDueInput.setVisibility(View.VISIBLE);
+                amountDueText.setVisibility(View.VISIBLE);
+                payButton.setVisibility(View.VISIBLE);
+
+                String payQuery = "SELECT amount_due FROM fee WHERE u_username='" + username + "';";
+                Statement payQueryStatement = conn.createStatement();
+                ResultSet payRS = payQueryStatement.executeQuery(payQuery);
+
+                if(payRS.next()){
+                    amountDueInput.setText("$" + payRS.getString("amount_due"));
+                    amountDueString = payRS.getString("amount_due");
+                }
+
+
+
 
             }else{
                 noOverDueText.setVisibility(View.VISIBLE);
@@ -88,6 +114,8 @@ public class myfinesMainActivity extends AppCompatActivity {
                 }
                 else
                     walletBalanceTextView.setTextColor(Color.BLACK);
+
+                walletBalanceString = walletRS.getString("amount_of_money");
             }
 
         }catch(SQLException e){
@@ -97,6 +125,51 @@ public class myfinesMainActivity extends AppCompatActivity {
     }
 
 
+
+
+
+    public void payButtonListener(View v){
+        TextView noOverDueText = (TextView)findViewById(R.id.noOverDueText);
+        TextView overdueText = (TextView)findViewById(R.id.overdueText);
+        TextView overdueText2 = (TextView)findViewById(R.id.overdueText2);
+        TextView overdueListTextView = (TextView) findViewById(R.id.overdueItemList);
+        TextView walletBalanceTextView = (TextView) findViewById(R.id.walletBalance);
+        TextView amountDueInput = (TextView) findViewById(R.id.amountDueInput);
+        TextView amountDueText = (TextView) findViewById(R.id.amountDueText);
+        Button payButton = (Button)findViewById(R.id.payButton);
+
+        amountDueDouble = Double.parseDouble(amountDueString);
+        walletBalance = Double.parseDouble(walletBalanceString);
+
+        walletBalance = walletBalance - amountDueDouble;
+
+        overdueText.setVisibility(View.INVISIBLE);
+        overdueText2.setVisibility(View.INVISIBLE);
+        overdueListTextView.setVisibility(View.INVISIBLE);
+        amountDueInput.setVisibility(View.INVISIBLE);
+        amountDueText.setVisibility(View.INVISIBLE);
+        payButton.setVisibility(View.INVISIBLE);
+
+        noOverDueText.setVisibility(View.VISIBLE);
+
+        conn = connectionclass(un, pass, db, ip);   //I need this so I can query to the database
+
+        walletBalanceTextView.setText("$" + Double.toString(walletBalance));
+
+
+        String updateBalanceQuery = "UPDATE fee SET paid ='True' WHERE fee_id='"+feeID+"';";
+        try{
+            Statement updateBalanceStnt = conn.createStatement();
+            updateBalanceStnt.executeQuery(updateBalanceQuery);
+
+        }catch(SQLException e){
+
+        }
+
+
+
+
+    }
 
     //connection class
     @SuppressLint("NewApi")
