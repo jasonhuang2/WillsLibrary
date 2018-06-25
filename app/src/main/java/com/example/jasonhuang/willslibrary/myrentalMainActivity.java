@@ -43,12 +43,11 @@ public class myrentalMainActivity extends AppCompatActivity {
         setTitle("My Rentals");
         username=getIntent().getStringExtra("username");
 
-        //NOTE: Fill these attributes before you execute this program
-        //NOTE: For ip address, if you are provided with a port number, the format will be "ipaddress:portnumber"
-        ip = "sql5004.site4now.net:1433";    //enter ip address here
-        db = "DB_A3C994_will";    //enter database name here
-        un = "DB_A3C994_will_admin";    //enter username here
-        pass = "willslibrary1";  //enter password here
+        ////Set from constants.
+        ip = DBlocationConstants.getip();
+        db = DBlocationConstants.getdb();
+        un = DBlocationConstants.getun();
+        pass = DBlocationConstants.getps();
         conn = connectionclass(un, pass, db, ip);   //I need this so I can query to the database
         //Added check to see if this was returned and added the rental_id=r_rental_id check.
         String rentalquery = "SELECT i_item_id, due_date, cost_per_day_overdue, type FROM DB_A3C994_will.dbo.rental, DB_A3C994_will.dbo.consume, DB_A3C994_will.dbo.item WHERE date_returned IS NULL AND item_id = i_item_id AND r_rental_id=rental_id AND u_username = '" + username + "';";

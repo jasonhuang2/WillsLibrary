@@ -38,10 +38,11 @@ public class itemOtherActivity extends AppCompatActivity {
         setContentView(R.layout.item_other_activity);
         setTitle("Item Description");
 
-        ip = "sql5004.site4now.net:1433";    //enter ip address here
-        db = "DB_A3C994_will";    //emter database name here
-        un = "DB_A3C994_will_admin";    //enter username here
-        pass = "willslibrary1";  //enter password here
+        ////Set from constants.
+        ip = DBlocationConstants.getip();
+        db = DBlocationConstants.getdb();
+        un = DBlocationConstants.getun();
+        pass = DBlocationConstants.getps();
         /*
         String title_string = getIntent().getExtras().getString("title_string");
         String datereleased_string = getIntent().getExtras().getString("datereleased_string");

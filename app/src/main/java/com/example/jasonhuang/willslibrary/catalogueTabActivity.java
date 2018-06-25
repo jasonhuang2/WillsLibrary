@@ -66,12 +66,11 @@ public class catalogueTabActivity extends AppCompatActivity {
         setContentView(R.layout.catalogue_tab_activity);
         Log.d("query", "Testing Tab Activity");
         //BOOK CLIENT STUFF
-        //NOTE: Fill these attributes before you execute this program
-        //NOTE: For ip address, if you are provided with a port number, the format will be "ipaddress:portnumber"
-        ip = "sql5004.site4now.net:1433";    //enter ip address here
-        db = "DB_A3C994_will";    //enter database name here
-        un = "DB_A3C994_will_admin";    //enter username here
-        pass = "willslibrary1";  //enter password here
+        ////Set from constants.
+        ip = DBlocationConstants.getip();
+        db = DBlocationConstants.getdb();
+        un = DBlocationConstants.getun();
+        pass = DBlocationConstants.getps();
         conn = connectionclass(un, pass, db, ip);   //I need this so I can query to the database
         books.clear();
         disks.clear();

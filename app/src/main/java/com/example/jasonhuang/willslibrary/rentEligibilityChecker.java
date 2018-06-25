@@ -13,10 +13,10 @@ import java.sql.Statement;
 public class rentEligibilityChecker {
     //NOTE: Fill these attributes before you execute this program
     //NOTE: For ip address, if you are provided with a port number, the format will be "ipaddress:portnumber"
-    String ip = "sql5004.site4now.net:1433";    //enter ip address here
-    String db = "DB_A3C994_will";    //emter database name here
-    String un = "DB_A3C994_will_admin";    //enter username here
-    String pass = "willslibrary1";  //enter password here
+    String ip = DBlocationConstants.getip();    //enter ip address here
+    String db = DBlocationConstants.getdb();    //emter database name here
+    String un = DBlocationConstants.getun();    //enter username here
+    String pass = DBlocationConstants.getps();  //enter password here
     Connection conn;
 
 

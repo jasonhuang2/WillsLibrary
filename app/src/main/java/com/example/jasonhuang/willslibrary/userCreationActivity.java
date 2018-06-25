@@ -31,12 +31,11 @@ public class userCreationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_creation);
-        //NOTE: Fill these attributes before you execute this program
-        //NOTE: For ip address, if you are provided with a port number, the format will be "ipaddress:portnumber"
-        ip = "sql5004.site4now.net:1433";    //enter ip address here
-        db = "DB_A3C994_will";    //emter database name here
-        un = "DB_A3C994_will_admin";    //enter username here
-        pass = "willslibrary1";  //enter password here
+        ////Set from constants.
+        ip = DBlocationConstants.getip();
+        db = DBlocationConstants.getdb();
+        un = DBlocationConstants.getun();
+        pass = DBlocationConstants.getps();
         setTitle("User Creation");
     }
 
