@@ -123,9 +123,8 @@
         android:id="@+id/addItemButton"
         android:layout_width="65dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="156dp"
+        android:layout_alignEnd="@+id/authorNameInput"
+        android:layout_alignTop="@+id/addDiskButton"
         android:background="#248281"
         android:onClick="addButtonBookListener"
         android:text="Add Book"
@@ -302,6 +301,27 @@
         android:layout_marginBottom="-214dp"
         android:ems="10"
         android:inputType="date"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/costInput"
+        android:layout_width="119dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/dateReleasedText"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/costText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/diskGenreText"
+        android:layout_marginBottom="55dp"
+        android:text="Cost:"
+        android:textStyle="bold"
         android:visibility="invisible" />
 
 </RelativeLayout>

@@ -21,6 +21,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 
 public class adminAddItemActivity extends AppCompatActivity {
     Connection conn;
@@ -75,6 +79,9 @@ public class adminAddItemActivity extends AppCompatActivity {
         final EditText diskDescriptionInput = (EditText)findViewById(R.id.diskDescriptionInput);
         final Button addDiskButton = (Button)findViewById(R.id.addDiskButton);
 
+        final TextView costText = (TextView)findViewById(R.id.costText);
+        final EditText costInput = (EditText)findViewById(R.id.costInput);
+
 
 
 
@@ -100,6 +107,8 @@ public class adminAddItemActivity extends AppCompatActivity {
                     isbnInput.setVisibility(View.VISIBLE);
                     genreInput.setVisibility(View.VISIBLE);
                     genreText.setVisibility(View.VISIBLE);
+                    costText.setVisibility(View.VISIBLE);
+                    costInput.setVisibility(View.VISIBLE);
 
                     //Disk
 
@@ -134,6 +143,8 @@ public class adminAddItemActivity extends AppCompatActivity {
                     isbnInput.setVisibility(View.INVISIBLE);
                     genreInput.setVisibility(View.INVISIBLE);
                     genreText.setVisibility(View.INVISIBLE);
+                    costText.setVisibility(View.VISIBLE);
+                    costInput.setVisibility(View.VISIBLE);
 
                     diskTitleText.setVisibility(View.VISIBLE);
                     diskDateReleasedText.setVisibility(View.VISIBLE);
@@ -209,9 +220,11 @@ public class adminAddItemActivity extends AppCompatActivity {
          EditText descriptionInput = (EditText)findViewById(R.id.descriptionInput);
          EditText isbnInput = (EditText)findViewById(R.id.isbnInput);
          EditText genreInput = (EditText)findViewById(R.id.genreInput);
+         EditText costInput = (EditText)findViewById(R.id.costInput);
 
 
-         //Ya writing your report? This query looks like this:
+
+        //Ya writing your report? This query looks like this:
         /**
          * INSERT INTO book (isbn, title, genre, publisher, publishing_date, description) VALUES ('999', 'testBook', 'testGenre', 'somePublisher', '01-01-1992', 'suppppppDescription');
            INSERT INTO author (b_isbn, author_name) VALUES ((SELECT isbn FROM book WHERE isbn='999'), 'bob');
@@ -221,10 +234,30 @@ public class adminAddItemActivity extends AppCompatActivity {
                  " '"+descriptionInput.getText().toString()+"');\n" +
                  "INSERT INTO author (b_isbn, author_name) VALUES ((SELECT isbn FROM book WHERE isbn='"+isbnInput.getText().toString()+"'), '"+authorNameInput.getText().toString()+"');";
 
+
+
+        Random rand = new Random();
+        int  rngNum = rand.nextInt(20 - 11 + 1) + 11;
+
+
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String todaysDate = df.format(c);
+
+
+         String updateItemTable = "INSERT INTO item (item_id, cost, status, type, quality, a_username, date_added, date_removed, b_isbn, d_title, d_date_released, o_other_id, image)" +
+                 " VALUES('"+Integer.toString(rngNum)+"', '"+costInput.getText().toString()+"', '1_In_Store', 'Book', 'Excellent', 'ADMIN', '"+todaysDate+"', NULL, '"+isbnInput.getText().toString()+"', '"+bookNameInput.getText().toString()+"', NULL, NULL, '@drawable/ic_launcher_background');";
         try{
+
+
             Statement addBookStatement = conn.createStatement();
             addBookStatement.execute(addBookQuery);
-            Toast.makeText(getApplicationContext(),"Book item has been added to the database",Toast.LENGTH_SHORT).show();
+
+
+
+
+
+            Toast.makeText(getApplicationContext(),"Book item has been added to the database. The Item ID is: " + Integer.toString(rngNum),Toast.LENGTH_SHORT).show();
             bookNameInput.setText("");
             authorNameInput.setText("");
             publisherNameInput.setText("");
@@ -234,7 +267,18 @@ public class adminAddItemActivity extends AppCompatActivity {
             genreInput.setText("");
 
 
+
         }catch(SQLException e){
+
+        }
+
+        try{
+            Statement updateTableStatement = conn.createStatement();
+            updateTableStatement.executeQuery(updateItemTable);
+
+            costInput.setText("");
+
+        }catch (SQLException e){
 
         }
 
@@ -248,15 +292,31 @@ public class adminAddItemActivity extends AppCompatActivity {
          EditText diskGenreInput = (EditText)findViewById(R.id.diskGenreInput);
          EditText diskTypeInput = (EditText)findViewById(R.id.diskTypeInput);
          EditText diskDescriptionInput = (EditText)findViewById(R.id.diskDescriptionInput);
+        EditText costInput = (EditText)findViewById(R.id.costInput);
+
 
         String addDiskQuery = "INSERT INTO disk (title, date_released, genre, disk_type, description) VALUES('"+
                 diskTitleInput.getText().toString() + "', '"+diskDateReleasedInput.getText().toString()+"', '"+diskGenreInput.getText().toString()
                 +"', '"+diskTypeInput.getText().toString()+"', '"+diskDescriptionInput.getText().toString()+"');";
 
+
+
+        Random rand = new Random();
+        int  rngNum = rand.nextInt(20 - 11 + 1) + 11;
+
+
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String todaysDate = df.format(c);
+
+
+        String updateItemTable = "INSERT INTO item (item_id, cost, status, type, quality, a_username, date_added, date_removed, b_isbn, d_title, d_date_released, o_other_id, image)" +
+                " VALUES('"+Integer.toString(rngNum)+"', '"+costInput.getText().toString()+"', '1_In_Store', 'Disk', 'Excellent', 'ADMIN', '"+todaysDate+"', NULL, NULL, '"+diskTitleInput.getText().toString()+"', '"+diskDateReleasedInput.getText().toString()+"', NULL, '@drawable/diskimage');";
+
         try{
             Statement addDiskStatement = conn.createStatement();
             addDiskStatement.execute(addDiskQuery);
-            Toast.makeText(getApplicationContext(),"Disk item has been added to the database",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Disk item has been added to the database. The Item ID is: " + Integer.toString(rngNum) ,Toast.LENGTH_SHORT).show();
 
             diskTitleInput.setText("");
             diskDateReleasedInput.setText("");
@@ -266,6 +326,16 @@ public class adminAddItemActivity extends AppCompatActivity {
 
 
         }catch(SQLException e){
+
+        }
+
+        try{
+            Statement updateTableStatement = conn.createStatement();
+            updateTableStatement.executeQuery(updateItemTable);
+
+            costInput.setText("");
+
+        }catch (SQLException e){
 
         }
 

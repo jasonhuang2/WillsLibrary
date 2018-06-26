@@ -13,6 +13,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 
 public class adminAddOtherItemActivity extends AppCompatActivity {
     Connection conn;
@@ -42,23 +46,51 @@ public class adminAddOtherItemActivity extends AppCompatActivity {
         EditText otherIdInput = (EditText)findViewById(R.id.otherIdInput);
         EditText typeInput = (EditText)findViewById(R.id.typeInput);
         EditText otherDescriptionInput = (EditText)findViewById(R.id.otherDescriptionInput);
+        EditText costInput = (EditText)findViewById(R.id.costInput);
 
 
         String addOtherQuery = "INSERT INTO other (other_id, type, description) VALUES('"+otherIdInput.getText().toString()+
                 "', '"+typeInput.getText().toString()+"', '"+otherDescriptionInput.getText().toString()+"');";
 
+        Random rand = new Random();
+        int  rngNum = rand.nextInt(20 - 11 + 1) + 11;
+
+
+
+
+
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String todaysDate = df.format(c);
+
+
+        String updateItemTable = "INSERT INTO item (item_id, cost, status, type, quality, a_username, date_added, date_removed, b_isbn, d_title, d_date_released, o_other_id, image)" +
+                " VALUES('"+Integer.toString(rngNum)+"', '"+costInput.getText().toString()+"', '1_In_Store', 'Other', 'Excellent', 'ADMIN', '"+todaysDate+"', NULL, NULL, NULL, NULL, "+otherIdInput.getText().toString()+", '@drawable/diskimage');";
+
+
         try{
             Statement addOtherStatement = conn.createStatement();
             addOtherStatement.execute(addOtherQuery);
-            Toast.makeText(getApplicationContext(),"Other item has been added to the database",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Other item has been added to the database. Item ID: " +Integer.toString(rngNum) ,Toast.LENGTH_SHORT).show();
 
             otherIdInput.setText("");
             typeInput.setText("");
             otherDescriptionInput.setText("");
+            costInput.setText("");
 
 
 
         }catch(SQLException e){
+
+        }
+
+        try{
+            Statement updateTableStatement = conn.createStatement();
+            updateTableStatement.executeQuery(updateItemTable);
+
+            costInput.setText("");
+
+        }catch (SQLException e){
 
         }
 

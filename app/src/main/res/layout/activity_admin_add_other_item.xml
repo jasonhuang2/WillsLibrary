@@ -72,10 +72,31 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="124dp"
+        android:layout_marginBottom="63dp"
         android:background="#248281"
         android:onClick="addOtherButtonListener"
         android:text="Add"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/costText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/otherIdText"
+        android:layout_marginBottom="163dp"
+        android:textStyle="bold"
+        android:text="Cost:" />
+
+    <EditText
+        android:id="@+id/costInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="152dp"
+        android:layout_marginEnd="55dp"
+        android:ems="10"
+        android:inputType="numberDecimal" />
 </RelativeLayout>
